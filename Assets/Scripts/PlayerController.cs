@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -14,6 +15,11 @@ public class PlayerController : MonoBehaviour
     }
     
     void Update()
+    {
+        Move();
+    }
+
+    public void Move()
     {
         float xInput = Input.GetAxisRaw("Horizontal");
         float xSpeed = xInput * speed;
