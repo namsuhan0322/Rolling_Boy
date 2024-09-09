@@ -22,4 +22,23 @@ public class PlayerController : MonoBehaviour
         
         playerRigidbody.velocity = newVelocity;
     }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        // Ground와 충돌하면
+        if (collision.gameObject.CompareTag("Ground"))
+        {
+            // Ground와 충돌 처리 로직이 있다면 여기에 추가
+        }
+
+        // JumpPad와 충돌하면
+        if (collision.gameObject.CompareTag("JumpPad"))
+        {
+            // 점프 패드의 점프 힘을 받아서 점프
+            JumpPad jumpPad = collision.gameObject.GetComponent<JumpPad>();
+
+            // JumpPad의 점프 힘을 이용해 위쪽으로 힘을 가함
+            playerRigidbody.AddForce(Vector3.up * jumpPad.jumpPadForce, ForceMode.Impulse);
+        }
+    }
 }
