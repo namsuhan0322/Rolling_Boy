@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [Header("플레이어 움직임")]
-    public float speed = 5f;
+    public float speed = 10.0f;
     private Rigidbody playerRigidbody;
     
     void Start()
