@@ -5,8 +5,9 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [Header("플레이어 움직임")]
+    [Header("플레이어")]
     public float speed = 10.0f;
+
     private Rigidbody playerRigidbody;
     
     void Start()
@@ -31,12 +32,6 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        // Ground와 충돌하면
-        if (collision.gameObject.CompareTag("Ground"))
-        {
-            // Ground와 충돌 처리 로직이 있다면 여기에 추가
-        }
-
         // JumpPad와 충돌하면
         if (collision.gameObject.CompareTag("JumpPad"))
         {
@@ -45,6 +40,13 @@ public class PlayerController : MonoBehaviour
 
             // JumpPad의 점프 힘을 이용해 위쪽으로 힘을 가함
             playerRigidbody.AddForce(Vector3.up * jumpPad.jumpPadForce, ForceMode.Impulse);
+        }
+
+        // Enemy와 충돌하면
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+            // 플레이어가 죽음
+            gameObject.SetActive(false);
         }
     }
 }
