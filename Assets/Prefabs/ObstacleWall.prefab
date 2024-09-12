@@ -45,7 +45,6 @@ GameObject:
   - component: {fileID: 654959166116238697}
   - component: {fileID: 7773867000724955415}
   - component: {fileID: 5435976247264392770}
-  - component: {fileID: 8082352976351265086}
   m_Layer: 0
   m_Name: ObstacleBase
   m_TagString: Enemy
@@ -139,19 +138,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &8082352976351265086
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6857149787704236765}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9d9a021593beed42aad7850178b5847, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 5
 --- !u!1 &8122643278766592245
 GameObject:
   m_ObjectHideFlags: 0
@@ -164,7 +150,6 @@ GameObject:
   - component: {fileID: 997416656224022301}
   - component: {fileID: 2551913765148049380}
   - component: {fileID: 5493115792202783656}
-  - component: {fileID: 7101398116233565020}
   m_Layer: 0
   m_Name: ObstacleTop
   m_TagString: Enemy
@@ -258,16 +243,3 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &7101398116233565020
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8122643278766592245}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9d9a021593beed42aad7850178b5847, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 5

@@ -10,7 +10,7 @@ public class LevelCreator : MonoBehaviour
     [SerializeField] private GameObject destinationObject;
     [SerializeField] private GameObject mainCamera;
 
-    public int levelLength { get; private set; } = 0;
+    public int levelLength { get; private set; } = 0;   
     
     void Start()
     {

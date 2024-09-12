@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 58719835944929485}
   - component: {fileID: 8277633867541725556}
   - component: {fileID: 5453549577623588330}
-  - component: {fileID: -1492371310547858031}
   m_Layer: 0
   m_Name: JumpPad
   m_TagString: JumpPad
@@ -148,16 +147,3 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   jumpPadForce: 13.18
---- !u!114 &-1492371310547858031
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6826378998550682520}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9d9a021593beed42aad7850178b5847, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 5
