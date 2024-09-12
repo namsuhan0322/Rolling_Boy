@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TraverTile : MonoBehaviour
+public class TravelTile : MonoBehaviour
 {
     // 현재 타일이 들고 있는 객체 (플레이어)
     private GameObject holdingObject;

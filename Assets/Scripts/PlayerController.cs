@@ -50,8 +50,7 @@ public class PlayerController : MonoBehaviour
             MoveSideScale(true);
         }
         transform.Translate(currentAcceleration * Time.deltaTime, 0.0f, 0.0f);
-
-        //Move forward
+        
         transform.Translate(0.0f, 0.0f, speed * Time.deltaTime);
     }
     

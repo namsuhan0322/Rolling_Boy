@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 9094588469546480457}
   - component: {fileID: 4574057699785775217}
   m_Layer: 0
-  m_Name: TraverTile
+  m_Name: TravelTile
   m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
