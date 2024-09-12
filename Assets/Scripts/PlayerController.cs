@@ -17,6 +17,8 @@ public class PlayerController : MonoBehaviour
     private Vector3 iniScale;
     private Vector3 moveSideScale;
     
+    public bool airborne = false;
+    
     void Start()
     {
         playerRigidbody = GetComponent<Rigidbody>();
@@ -62,7 +64,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        // JumpPad와 충돌하면
+        /*// JumpPad와 충돌하면
         if (collision.gameObject.CompareTag("JumpPad"))
         {
             // 점프 패드의 점프 힘을 받아서 점프
@@ -70,7 +72,7 @@ public class PlayerController : MonoBehaviour
 
             // JumpPad의 점프 힘을 이용해 위쪽으로 힘을 가함
             playerRigidbody.AddForce(Vector3.up * jumpPad.jumpPadForce, ForceMode.Impulse);
-        }
+        }*/
 
         // Enemy와 충돌하면
         if (collision.gameObject.CompareTag("Enemy"))
