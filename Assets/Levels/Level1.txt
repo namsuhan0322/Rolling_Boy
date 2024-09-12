@@ -54,14 +54,14 @@ aaaaa
 aaaaa
 aaaaa
 aaaaa
-ggggg
-ggggg
-ggggg
-ggggg
-ggggg
-ggggg
-aaaaa
-aaaaa
+   a 
+   aa
+   aa
+   gg
+   gg
+   g 
+  gg 
+ gg  
 aaaaa
 aaaaa
 aaaaa
