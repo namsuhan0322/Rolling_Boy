@@ -11,9 +11,11 @@ GameObject:
   - component: {fileID: 5516969018540394272}
   - component: {fileID: 2815060080837295081}
   - component: {fileID: 5106453083109297530}
+  - component: {fileID: -1104090353738343936}
+  - component: {fileID: 3217237467699873054}
   m_Layer: 0
   m_Name: Attachment_Small Wall
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -114,3 +116,40 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &-1104090353738343936
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4733174952928190553}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 009dd476cb5f7004189fe0b40bb3135b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  range: 13
+  playerLayer:
+    serializedVersion: 2
+    m_Bits: 64
+--- !u!65 &3217237467699873054
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4733174952928190553}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1.5269938, z: 1}
+  m_Center: {x: 0, y: -0.2365031, z: 0}
