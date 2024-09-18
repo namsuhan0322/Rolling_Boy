@@ -64,16 +64,6 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        /*// JumpPad와 충돌하면
-        if (collision.gameObject.CompareTag("JumpPad"))
-        {
-            // 점프 패드의 점프 힘을 받아서 점프
-            JumpPad jumpPad = collision.gameObject.GetComponent<JumpPad>();
-
-            // JumpPad의 점프 힘을 이용해 위쪽으로 힘을 가함
-            playerRigidbody.AddForce(Vector3.up * jumpPad.jumpPadForce, ForceMode.Impulse);
-        }*/
-
         // Enemy와 충돌하면
         if (collision.gameObject.CompareTag("Enemy"))
         {
