@@ -121,12 +121,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 686914697525961998}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 009dd476cb5f7004189fe0b40bb3135b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 3
+  range: 15
   playerLayer:
     serializedVersion: 2
     m_Bits: 64
