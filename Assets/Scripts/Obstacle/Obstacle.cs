@@ -7,10 +7,24 @@ public class Obstacle : MonoBehaviour
     public float range = 5f;  // 감지 범위
     private Animator anim;     // 애니메이터 변수
     public LayerMask playerLayer;  // 플레이어 레이어 설정 (태그 대신)
+    
+    // 레이저 프리팹 오브젝트
+    public GameObject laserPrefab;  // 레이저 프리팹
+
+    // 레이저 프리팹 안의 레이저빔 자식 오브젝트
+    private GameObject laserBeam;
+    
+    public float animationDuration = 1.3f;
 
     private void Start()
     {
         anim = GetComponent<Animator>();  // 애니메이터 컴포넌트 가져오기
+        
+        // 레이저 프리팹의 자식 오브젝트(레이저빔) 찾기
+        if (laserPrefab != null)
+        {
+            laserBeam = laserPrefab.transform.Find("Beam").gameObject;  // 레이저빔 자식 오브젝트의 이름을 입력
+        }
     }
 
     private void Update()
@@ -23,11 +37,32 @@ public class Obstacle : MonoBehaviour
             Debug.Log("범위 안에 들어옴!");
             // 플레이어가 범위 내에 있을 경우 애니메이션 실행
             anim.SetBool("isOpening", true);
+            
+            // 코루틴을 통해 일정 시간 후에 레이저빔을 활성화
+            StartCoroutine(ActivateLaserAfterDelay(animationDuration));
         }
         else
         {
             // 플레이어가 범위 내에 없을 경우 애니메이션 중지
             anim.SetBool("isOpening", false);
+            // 레이저빔 끄기
+            if (laserBeam != null)
+            {
+                laserBeam.SetActive(false);
+            }
+        }
+    }
+
+    // 일정 시간 후에 레이저 빔을 활성화하는 코루틴
+    private IEnumerator ActivateLaserAfterDelay(float delay)
+    {
+        // 애니메이션이 끝날 때까지 기다림
+        yield return new WaitForSeconds(delay);
+        
+        // 레이저 빔 활성화
+        if (laserBeam != null)
+        {
+            laserBeam.SetActive(true);
         }
     }
 
