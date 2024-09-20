@@ -287,6 +287,7 @@ MonoBehaviour:
   - {fileID: 7476086706778402749, guid: 5c7b17bb2c6e28c44998e18219c8be0b, type: 3}
   - {fileID: 3079449223638672510, guid: f1379836f7c9fd44ab069d091a539822, type: 3}
   - {fileID: 7132537929207538715, guid: f672288b703d258488381eade280cbd6, type: 3}
+  - {fileID: 7132537929207538715, guid: 095ac3d9562a5fc4798bbc7a32e43959, type: 3}
   - {fileID: 6712893001509398462, guid: aa641cb4d5c65b74d9d889a8bd89bfdb, type: 3}
   destinationObject: {fileID: 1866113433}
   mainCamera: {fileID: 330585543}
@@ -596,7 +597,7 @@ PrefabInstance:
     - target: {fileID: 7953776159609552885, guid: 4e134d6e1dc80334c9c3b158407ce28d,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 7953776159609552885, guid: 4e134d6e1dc80334c9c3b158407ce28d,
         type: 3}

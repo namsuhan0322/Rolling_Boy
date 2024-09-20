@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 977143062850941653}
   - component: {fileID: 1634100294100197883}
   - component: {fileID: 3772247576645393003}
+  - component: {fileID: 2703878726283671923}
   m_Layer: 0
   m_Name: Crasher
   m_TagString: Untagged
@@ -143,6 +144,27 @@ ParentConstraint:
   m_Sources:
   - sourceTransform: {fileID: 3769875334588937940}
     weight: 1
+--- !u!65 &2703878726283671923
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4379606174694805379}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1.0293908, y: 0.8847953, z: 0.8712799}
+  m_Center: {x: 0.000000059604645, y: 0.008399308, z: -0.00000008940697}
 --- !u!1 &4800192032672705866
 GameObject:
   m_ObjectHideFlags: 0
@@ -236,7 +258,6 @@ GameObject:
   m_Component:
   - component: {fileID: 9055149045370427893}
   - component: {fileID: 8757529747100139628}
-  - component: {fileID: -12232718612955453}
   m_Layer: 0
   m_Name: Attachment_Crasher
   m_TagString: Enemy
@@ -282,22 +303,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &-12232718612955453
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7476086706778402749}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 009dd476cb5f7004189fe0b40bb3135b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  range: 13
-  playerLayer:
-    serializedVersion: 2
-    m_Bits: 64
 --- !u!1 &8829195161058475692
 GameObject:
   m_ObjectHideFlags: 0
