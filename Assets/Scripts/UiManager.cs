@@ -2,14 +2,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class UiManager : MonoBehaviour
 {
     [SerializeField]
-    GameObject[] gameUI = new GameObject[6];
-
-    [SerializeField] 
-    private SnapScroll snapScroll;
+    List<GameObject> gameUI = new List<GameObject>();
 
     private static UiManager Instance;
 
@@ -18,13 +16,18 @@ public class UiManager : MonoBehaviour
         if (Instance == null)
         {
             Instance = this;
-            DontDestroyOnLoad(gameObject);
+            //DontDestroyOnLoad(gameObject);
         }
         else
         {
             Destroy(gameObject);
         }
 
+        /*ClearUI();
+        gameUI[0].SetActive(true);
+        gameUI[1].SetActive(true);*/
+
+        Debug.Log("나는 바보");
     }
     void Update()
     {
@@ -32,7 +35,7 @@ public class UiManager : MonoBehaviour
     }
     private void ClearUI()  //UI초기화
     {
-        for (int i = 1; i < gameUI.Length - 1; i++)
+        for (int i = 1; i < gameUI.Count; i++)
         {
             gameUI[i].SetActive(false);
         }
@@ -85,7 +88,6 @@ public class UiManager : MonoBehaviour
     //게임씬으로 이동
     public void PlayGame()
     {
-        LoadingSceneController.LoadScene("GameScene");
+        LoadingSceneController.LoadScene("Test_GameScene");  //임시
     }
-
 }
