@@ -8,6 +8,9 @@ public class UiManager : MonoBehaviour
     [SerializeField]
     GameObject[] gameUI = new GameObject[6];
 
+    [SerializeField] 
+    private SnapScroll snapScroll;
+
     private static UiManager Instance;
 
     private void Awake()
@@ -21,6 +24,7 @@ public class UiManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
     }
     void Update()
     {
