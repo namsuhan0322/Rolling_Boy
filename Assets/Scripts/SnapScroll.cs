@@ -18,7 +18,7 @@ public class SnapScroll : MonoBehaviour, IEndDragHandler
     public bool canTouchSnap = false;
     float dragThreshould;
 
-    public Button[] uiButton = new Button[4];
+    public Button[] uiButton;
 
     public bool isTurning = false;
 

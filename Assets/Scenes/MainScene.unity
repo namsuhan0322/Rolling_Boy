@@ -1704,7 +1704,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &311179887
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2373,7 +2373,7 @@ GameObject:
   - component: {fileID: 432041573}
   - component: {fileID: 432041572}
   m_Layer: 5
-  m_Name: N_Text (2)
+  m_Name: Shield_N_Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2395,7 +2395,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 489, y: 630}
+  m_AnchoredPosition: {x: 431, y: 630}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &432041572
@@ -3040,7 +3040,7 @@ GameObject:
   - component: {fileID: 572699303}
   - component: {fileID: 572699302}
   m_Layer: 5
-  m_Name: Image (1)
+  m_Name: Jewel_Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3062,8 +3062,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -320, y: 619}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: -378, y: 619}
+  m_SizeDelta: {x: 110, y: 110}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &572699302
 MonoBehaviour:
@@ -3085,7 +3085,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 880c4333b95db87428096fbd41b5f655, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -3249,7 +3249,7 @@ GameObject:
   - component: {fileID: 611338005}
   - component: {fileID: 611338004}
   m_Layer: 5
-  m_Name: N_Text
+  m_Name: Jewel_N_Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3271,7 +3271,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -149, y: 630}
+  m_AnchoredPosition: {x: -207, y: 630}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &611338004
@@ -3479,12 +3479,10 @@ MonoBehaviour:
   - {fileID: 1792100510}
   - {fileID: 311179886}
   - {fileID: 1233019623}
-  - {fileID: 1352671719}
   - {fileID: 697345368}
   - {fileID: 1010038761}
   - {fileID: 718490909}
   - {fileID: 1182889104}
-  snapScroll: {fileID: 0}
 --- !u!4 &628451139
 Transform:
   m_ObjectHideFlags: 0
@@ -3942,7 +3940,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &697345369
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4045,7 +4043,7 @@ GameObject:
   - component: {fileID: 699821096}
   - component: {fileID: 699821095}
   m_Layer: 5
-  m_Name: N_Text (1)
+  m_Name: Ball_N_Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4067,7 +4065,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 169, y: 630}
+  m_AnchoredPosition: {x: 111, y: 630}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &699821095
@@ -6053,7 +6051,7 @@ GameObject:
   - component: {fileID: 948660396}
   - component: {fileID: 948660395}
   m_Layer: 5
-  m_Name: Image (2)
+  m_Name: Shield_Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6075,7 +6073,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 320, y: 619}
+  m_AnchoredPosition: {x: 262, y: 619}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &948660395
@@ -6098,7 +6096,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 6124eceb2b2f01344aa70d269ca8cf00, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -6262,7 +6260,7 @@ GameObject:
   - component: {fileID: 955200900}
   - component: {fileID: 955200899}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Ball_Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -6284,7 +6282,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 619}
+  m_AnchoredPosition: {x: -58, y: 619}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &955200899
@@ -6307,7 +6305,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: bd4dcaf1dd818594d9b028cc41391bdd, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -10392,11 +10390,7 @@ MonoBehaviour:
   tweenTime: 0.35
   tweenType: 14
   canTouchSnap: 0
-  uiButton:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  uiButton: []
   isTurning: 0
 --- !u!1 &1613424422
 GameObject:
@@ -11500,7 +11494,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1792100511
 MonoBehaviour:
   m_ObjectHideFlags: 0
