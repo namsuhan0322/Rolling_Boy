@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5106453083109297530}
   - component: {fileID: -1104090353738343936}
   - component: {fileID: 3217237467699873054}
+  - component: {fileID: -2200152816957917768}
   m_Layer: 0
   m_Name: Attachment_Small Wall
   m_TagString: Enemy
@@ -132,6 +133,8 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 64
+  laserPrefab: {fileID: 0}
+  animationDuration: 1.5
 --- !u!65 &3217237467699873054
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -153,3 +156,16 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1.5269938, z: 1}
   m_Center: {x: 0, y: -0.2365031, z: 0}
+--- !u!114 &-2200152816957917768
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4733174952928190553}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90620e47f8726be4e99db7b44bf30e7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseSpeed: 5

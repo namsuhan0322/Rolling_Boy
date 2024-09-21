@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5745669957926146483}
   - component: {fileID: 5213933678743295239}
   - component: {fileID: 6087725089903116698}
+  - component: {fileID: -5085165266780012250}
   m_Layer: 0
   m_Name: Attachment_Big Wall
   m_TagString: Enemy
@@ -130,6 +131,8 @@ MonoBehaviour:
   playerLayer:
     serializedVersion: 2
     m_Bits: 64
+  laserPrefab: {fileID: 0}
+  animationDuration: 1.5
 --- !u!65 &6087725089903116698
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -151,3 +154,16 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.9193962, y: 1.6945144, z: 0.9193962}
   m_Center: {x: 0, y: 0.73974174, z: 0}
+--- !u!114 &-5085165266780012250
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 686914697525961998}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90620e47f8726be4e99db7b44bf30e7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseSpeed: 5

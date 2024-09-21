@@ -22,7 +22,8 @@ public class LevelCreator : MonoBehaviour
         StreamReader reader = sourceFile.OpenText();
         string text = reader.ReadLine();
 
-        for (int i = 0; text != null; ++i) {
+        for (int i = 0; text != null; ++i) 
+        {
             createRow(i, text);
             text = reader.ReadLine();
             levelLength = i;
@@ -40,7 +41,8 @@ public class LevelCreator : MonoBehaviour
                 createTile(zPos, 0, rowInfo[0] - 'a');
                 break;
             default:
-                for (int i = 0; i < 5; i++) {
+                for (int i = 0; i < 5; i++) 
+                {
                     createTile(zPos, i, rowInfo[i] - 'a');
                 }
                 break;

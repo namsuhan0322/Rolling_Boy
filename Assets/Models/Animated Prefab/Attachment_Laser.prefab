@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 5080765253393198315}
   - component: {fileID: 1511438042582941471}
   - component: {fileID: 3393039686071637944}
+  - component: {fileID: -8857758454957596936}
   m_Layer: 0
   m_Name: Attachment_Laser
   m_TagString: Enemy
@@ -132,7 +133,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   laserPrefab: {fileID: 3079449223638672510}
-  animationDuration: 1.5
+  animationDuration: 2
 --- !u!114 &3393039686071637944
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -143,6 +144,18 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3d422753c6bbc72439ecfa97a4f22ed2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-8857758454957596936
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3079449223638672510}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90620e47f8726be4e99db7b44bf30e7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &3691719141252109401

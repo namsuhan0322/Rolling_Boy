@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [Header("플레이어")]
-    public float speed = 5f;
+    public float speed;
 
     private float currentAcceleration = 0;
     private Rigidbody playerRigidbody;
@@ -31,6 +31,7 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        speed = GameManager.instance.GetMovementSpeed(); // BPM에 따른 속도 업데이트
         Move();
     }
 
@@ -54,9 +55,9 @@ public class PlayerController : MonoBehaviour
             if (Mathf.Abs(currentAcceleration) < maxAccSide || currentAcceleration < 0) currentAcceleration += Time.deltaTime * accelerationRate;
             MoveSideScale(true);
         }
-        transform.Translate(currentAcceleration * Time.deltaTime, 0.0f, 0.0f);
         
-        transform.Translate(0.0f, 0.0f, speed * Time.deltaTime);
+        transform.Translate(currentAcceleration * Time.deltaTime, 0.0f, 0.0f);
+        transform.Translate(0.0f, 0.0f, speed * Time.deltaTime); // BPM에 따라 속도 적용
     }
 
     private void MoveSideScale(bool moveSide)
@@ -67,12 +68,10 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        // Enemy와 충돌하면
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            // 플레이어가 죽음
             gameObject.SetActive(false);
-            cameraMove.shake = true; // 카메라 흔들기 활성화
+            cameraMove.shake = true;
         }
     }
 }

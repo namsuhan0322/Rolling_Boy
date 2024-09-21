@@ -19,7 +19,8 @@ public class TravelTile : MonoBehaviour
     private void OnCollisionEnter(Collision collision)
     {
         // 타일이 지면과 충돌하고, 충돌 지점이 타일의 X축 위치와 같은 경우
-        if (collision.gameObject.CompareTag("Ground") && collision.transform.position.x == transform.position.x) {
+        if (collision.gameObject.CompareTag("Ground") && collision.transform.position.x == transform.position.x) 
+        {
             // 타일이 들고 있는 객체를 해제
             holdingObject = null;
         }
@@ -28,7 +29,8 @@ public class TravelTile : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         // 충돌한 객체가 "Player" 태그를 가진 경우
-        if (other.gameObject.CompareTag("Player")) {
+        if (other.gameObject.CompareTag("Player")) 
+        {
             // 타일이 플레이어를 들고 있음
             holdingObject = other.gameObject;
         }
@@ -37,7 +39,8 @@ public class TravelTile : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         // 충돌한 객체가 "Player" 태그를 가진 경우
-        if (other.gameObject.CompareTag("Player")) {
+        if (other.gameObject.CompareTag("Player")) 
+        {
             // 타일이 들고 있는 객체를 해제
             holdingObject = null;
         }

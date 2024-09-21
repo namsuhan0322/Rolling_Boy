@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 4681694794451277348}
   - component: {fileID: -3302418477334956895}
   - component: {fileID: -1882990551200395193}
+  - component: {fileID: 4873702145452427747}
   m_Layer: 0
   m_Name: Attachment_Rolling Cylinder_R
   m_TagString: Enemy
@@ -89,12 +90,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fb58c715cd1e2c64e808f1b2205999a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 7
-  moveSpeed: 3
-  moveDistance: 5
+  baseRange: 7
+  baseMoveSpeed: 3
+  moveDistance: 10
+  minRange: 7
+  maxRange: 10
   playerLayer:
     serializedVersion: 2
     m_Bits: 64
+--- !u!114 &4873702145452427747
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7132537929207538715}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90620e47f8726be4e99db7b44bf30e7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &5436987556012456846
 PrefabInstance:
   m_ObjectHideFlags: 0

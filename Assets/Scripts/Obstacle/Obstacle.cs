@@ -5,6 +5,7 @@ using UnityEngine;
 public class Obstacle : MonoBehaviour
 {
     public float range = 5f;  // 감지 범위
+    private float currentRange;     // 현재 감지 범위
     private Animator anim;     // 애니메이터 변수
     public LayerMask playerLayer;  // 플레이어 레이어 설정 (태그 대신)
     
@@ -14,7 +15,7 @@ public class Obstacle : MonoBehaviour
     // 레이저 프리팹 안의 레이저빔 자식 오브젝트
     private GameObject laserBeam;
     
-    public float animationDuration = 1.3f;
+    public float animationDuration = 2f;
 
     private void Start()
     {
@@ -29,17 +30,22 @@ public class Obstacle : MonoBehaviour
 
     private void Update()
     {
+        // BPM에 따라 현재 범위 조정
+        currentRange = range * (GameManager.instance.bpm / 120f); // 기본 범위를 BPM에 따라 조정
+        
         // 주위에 플레이어가 있는지 확인하는 구 탐지 (3D)
-        Collider[] playerInRange = Physics.OverlapSphere(transform.position, range, playerLayer);
+        Collider[] playerInRange = Physics.OverlapSphere(transform.position, currentRange, playerLayer);
         
         if (playerInRange.Length > 0)
         {
-            Debug.Log("범위 안에 들어옴!");
             // 플레이어가 범위 내에 있을 경우 애니메이션 실행
             anim.SetBool("isOpening", true);
             
+            // 애니메이션 속도에 따라 지연 시간 계산
+            float delay = (90f / 60f) / (anim.speed); // 1.5초를 현재 애니메이션 속도로 나눈 값
+            
             // 코루틴을 통해 일정 시간 후에 레이저빔을 활성화
-            StartCoroutine(ActivateLaserAfterDelay(animationDuration));
+            StartCoroutine(ActivateLaserAfterDelay(delay));
         }
         else
         {

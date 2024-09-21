@@ -258,6 +258,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9055149045370427893}
   - component: {fileID: 8757529747100139628}
+  - component: {fileID: -1330434424496295049}
   m_Layer: 0
   m_Name: Attachment_Crasher
   m_TagString: Enemy
@@ -303,6 +304,19 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &-1330434424496295049
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7476086706778402749}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 90620e47f8726be4e99db7b44bf30e7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  baseSpeed: 5
 --- !u!1 &8829195161058475692
 GameObject:
   m_ObjectHideFlags: 0

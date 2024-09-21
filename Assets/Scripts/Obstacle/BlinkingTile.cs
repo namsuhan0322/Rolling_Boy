@@ -28,11 +28,15 @@ public class BlinkingTile : MonoBehaviour
     void Update()
     {
         // 주기가 지나면 블링크 상태에 따라 활성화/비활성화 상태 전환
-        if (Time.time - startTime >= period) {
+        if (Time.time - startTime >= period) 
+        {
             if (blink)
+            {
                 for (int i = 1; i < childTiles.Length; i++)
-                    childTiles[i].gameObject.SetActive(!childTiles[i].gameObject.activeSelf);
-            
+                {
+                    childTiles[i].gameObject.SetActive(!childTiles[i].gameObject.activeSelf); 
+                }
+            }
             // 시작 시간 갱신
             startTime = Time.time;
         }
@@ -41,7 +45,8 @@ public class BlinkingTile : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         // 플레이어가 충돌하면 블링크 중지
-        if (other.CompareTag("Player")) {
+        if (other.CompareTag("Player")) 
+        {
             blink = false;
         }
     }
@@ -49,7 +54,8 @@ public class BlinkingTile : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         // 플레이어가 충돌을 벗어나면 블링크 재개
-        if (other.CompareTag("Player")) {
+        if (other.CompareTag("Player")) 
+        {
             blink = true;
         }
     }
