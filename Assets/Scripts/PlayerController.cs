@@ -10,22 +10,25 @@ public class PlayerController : MonoBehaviour
 
     private float currentAcceleration = 0;
     private Rigidbody playerRigidbody;
-    
+
     [SerializeField] private float maxAccSide = 6;
     [SerializeField] private float accelerationRate = 20;
-    
+
     private Vector3 iniScale;
     private Vector3 moveSideScale;
-    
+
     public bool airborne = false;
-    
+
+    private CameraMove cameraMove;
+
     void Start()
     {
         playerRigidbody = GetComponent<Rigidbody>();
         iniScale = transform.localScale;
         moveSideScale = iniScale - new Vector3(iniScale.x / 8, 0, 0);
+        cameraMove = Camera.main.GetComponent<CameraMove>(); // CameraMove 컴포넌트를 찾기
     }
-    
+
     void Update()
     {
         Move();
@@ -55,8 +58,8 @@ public class PlayerController : MonoBehaviour
         
         transform.Translate(0.0f, 0.0f, speed * Time.deltaTime);
     }
-    
-    private void MoveSideScale (bool moveSide)
+
+    private void MoveSideScale(bool moveSide)
     {
         if (moveSide) transform.localScale = Vector3.Lerp(transform.localScale, moveSideScale, Time.deltaTime * maxAccSide);
         else transform.localScale = Vector3.Lerp(transform.localScale, iniScale, Time.deltaTime * maxAccSide);
@@ -69,6 +72,7 @@ public class PlayerController : MonoBehaviour
         {
             // 플레이어가 죽음
             gameObject.SetActive(false);
+            cameraMove.shake = true; // 카메라 흔들기 활성화
         }
     }
 }
