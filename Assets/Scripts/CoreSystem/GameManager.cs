@@ -27,4 +27,14 @@ public class GameManager : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    void Update()
+    {
+        // 게임이 실행 중이지 않고, 마우스 왼쪽 버튼 클릭 시
+        if (Input.GetMouseButtonDown(0) && !GameStateManager.instance.isGameRunning)
+        {
+            // 3초 후 게임을 시작하는 코루틴 호출
+            StartCoroutine(GameStateManager.instance.StartGameWithDelay(3f));
+        }
+    }
 }
