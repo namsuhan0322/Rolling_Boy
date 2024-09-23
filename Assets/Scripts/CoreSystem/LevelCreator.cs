@@ -12,6 +12,9 @@ public class LevelCreator : MonoBehaviour
 
     private List<GameObject> createdTiles = new List<GameObject>();
 
+    //게임 진행도에 나타낼 변수값
+    public int allBlock = 1;
+
     void Start()
     {
         if (GameManager.instance != null)
@@ -26,6 +29,7 @@ public class LevelCreator : MonoBehaviour
         {
             createRow(i, text);
             text = reader.ReadLine();
+            allBlock++;
         }
 
         UpdateTileVisibility(); // 시작 시 타일 가시성 업데이트

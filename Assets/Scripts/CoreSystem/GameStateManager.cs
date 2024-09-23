@@ -21,9 +21,15 @@ public class GameStateManager : MonoBehaviour
 
     void Start()
     {
+        ReadyGame();
+    }
+
+    public void ReadyGame() //게임 다시하기를 할 경우, DontDistroyOnLoad로 Start 메서드가 작동하지 않아서 수정
+    {
         // 게임이 시작되면 초기에는 멈춘 상태로 설정
         Time.timeScale = 0f;
         isGameRunning = false;
+
     }
 
     // 3초 후 게임을 시작하는 코루틴

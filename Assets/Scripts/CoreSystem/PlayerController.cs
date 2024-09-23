@@ -33,6 +33,11 @@ public class PlayerController : MonoBehaviour
     {
         speed = GameManager.instance.GetMovementSpeed(); // BPM에 따른 속도 업데이트
         Move();
+
+        if (gameObject.transform.position.y <= -3)
+        {
+            gameObject.SetActive(false);
+        }
     }
 
     public void Move()
