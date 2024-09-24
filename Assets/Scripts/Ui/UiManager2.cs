@@ -14,13 +14,30 @@ public class UiManager2 : MonoBehaviour
     [SerializeField]
     private Slider progressSlider;
     [SerializeField]
-    private Slider progressSlider1;
-    [SerializeField]
     private TextMeshProUGUI progress_Text;
+    [SerializeField]
+    private Slider progressSlider_2;
+    [SerializeField]
+    private TextMeshProUGUI progress_Text_2;
+    [SerializeField]
+    private TextMeshProUGUI realTimeProgress;
+    [SerializeField]
+    private TextMeshProUGUI diaMond_N_Text;
+    [SerializeField]
+    private TextMeshProUGUI diaMond_N_Text_2;
+
 
     LevelCreator levelCreator;
     private int allBlock = 1;
     private float currentBlock = 0f;
+
+    private float point;
+    private float bestScore;
+    private int diaMond_N = 0;  //다이아몬드 개수를 넣을 변수
+    private int allDiaMond_N = 10;
+
+    public static bool isStartSetting = false;
+
 
     private void Awake()
     {
@@ -35,6 +52,8 @@ public class UiManager2 : MonoBehaviour
         {
             gameUI2[i].SetActive(false);
         }
+
+        bestScore = PlayerPrefs.GetFloat("BestScore");
     }
 
     void Update()
@@ -51,8 +70,20 @@ public class UiManager2 : MonoBehaviour
         {
             GameOver();
         }
+
+        allBlock = levelCreator.allBlock;
+        currentBlock = player.transform.position.z + 1;
+        point = currentBlock / allBlock;
+        realTimeProgress.text = string.Format("{0}%", Mathf.Ceil(point * 100).ToString());       //실시간 게임진행도표시
+
+        if (player.transform.position.z >= allBlock)  //게임 클리어조건
+        {
+            GameOver();
+        }
     }
 
+
+    //버튼에 붙일 메서드 + 게임종료 메서드
     public void StartGame()
     {
         if (GameStateManager.instance.isGameRunning)
@@ -70,6 +101,8 @@ public class UiManager2 : MonoBehaviour
 
     public void GoBackMain()
     {
+        isStartSetting = true;
+
         SceneManager.LoadScene("MainScene");
     }
 
@@ -85,22 +118,38 @@ public class UiManager2 : MonoBehaviour
         Time.timeScale = 1f;
     }
 
-    public void GameOver()
+    public void GameOver()  //BestScore, BestScore_st 정적변수 설정
     {
-        gameUI2[2].SetActive(false);
-        gameUI2[4].SetActive(true);
+        if (point >= 1)
+        {
+            point = 1f;
+        }
 
-        allBlock = levelCreator.allBlock;
-        currentBlock = player.transform.position.z + 1;
-        progressSlider.value = currentBlock / allBlock;
+        if (bestScore < point)
+        {
+            PlayerPrefs.SetFloat("BestScore", point);
+            PlayerPrefs.SetString("BestScore_st", string.Format("{0}%", Mathf.Ceil(point * 100).ToString()));
+            PlayerPrefs.Save();
+        }
 
-        progress_Text.text = string.Format("{0}%" ,Mathf.Ceil((currentBlock / allBlock) * 100).ToString());
-    }
+        if (player.activeSelf == false)  //게임 클리어시 플레이어의 중력값을 0으로 해서 판단.
+        {
+            gameUI2[2].SetActive(false);
+            gameUI2[4].SetActive(true);
 
-    public void GameClear()
-    {
-        gameUI2[2].SetActive(false);
-        gameUI2[5].SetActive(true);
+            progressSlider.value = point;
+            progress_Text.text = string.Format("{0}%", Mathf.Ceil(point * 100).ToString());
+            diaMond_N_Text.text = string.Format("{0}/{1}",diaMond_N ,allDiaMond_N);
+        }
+        else
+        {
+            gameUI2[2].SetActive(false);
+            gameUI2[5].SetActive(true);
+
+            progressSlider_2.value = point;
+            progress_Text_2.text = string.Format("{0}%", Mathf.Ceil(point * 100).ToString());
+            diaMond_N_Text_2.text = string.Format("{0}/{1}", diaMond_N, allDiaMond_N);
+        }
     }
 
     public void ReStartGame()
