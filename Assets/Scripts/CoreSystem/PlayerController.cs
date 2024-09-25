@@ -34,9 +34,9 @@ public class PlayerController : MonoBehaviour
         speed = GameManager.instance.GetMovementSpeed(); // BPM에 따른 속도 업데이트
         Move();
 
-        if (gameObject.transform.position.y <= -3)
+        if (gameObject.transform.position.y <= -2.5f)
         {
-            gameObject.SetActive(false);
+            Die();
         }
     }
 
@@ -75,8 +75,13 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Enemy"))
         {
-            gameObject.SetActive(false);
-            cameraMove.shake = true;
+            Die();
         }
+    }
+    
+    void Die()
+    {
+        gameObject.SetActive(false);
+        cameraMove.shake = true;
     }
 }

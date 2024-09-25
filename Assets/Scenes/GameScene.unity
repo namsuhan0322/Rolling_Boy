@@ -334,9 +334,12 @@ MonoBehaviour:
   - {fileID: 7132537929207538715, guid: f672288b703d258488381eade280cbd6, type: 3}
   - {fileID: 7132537929207538715, guid: 095ac3d9562a5fc4798bbc7a32e43959, type: 3}
   - {fileID: 6712893001509398462, guid: aa641cb4d5c65b74d9d889a8bd89bfdb, type: 3}
+  - {fileID: 1207774580752686051, guid: 5c88b47ad1bb852428691c62b290a954, type: 3}
+  - {fileID: 1207774580752686051, guid: 8b8d50163593bca428fa5416555dbfa2, type: 3}
   destinationObject: {fileID: 1866113433}
   mainCamera: {fileID: 330585543}
   viewDistance: 50
+  allBlock: 1
 --- !u!114 &330585549
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -736,6 +739,6 @@ SceneRoots:
   m_Roots:
   - {fileID: 1420898195}
   - {fileID: 723958082}
+  - {fileID: 193456315}
   - {fileID: 8031415953351841576}
   - {fileID: 1866113434}
-  - {fileID: 193456315}
