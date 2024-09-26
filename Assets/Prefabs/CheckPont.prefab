@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 1861730196862397594}
   - component: {fileID: 2525826795280776044}
   - component: {fileID: 2895746970164790821}
-  - component: {fileID: 8136691287410038526}
+  - component: {fileID: 4745840467842357057}
   m_Layer: 0
-  m_Name: MapChangeTile
+  m_Name: CheckPont
   m_TagString: Ground
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -106,7 +106,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &8136691287410038526
+--- !u!114 &4745840467842357057
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -115,9 +115,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 1207774580752686051}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7c9ef8179b7b0e04587fc4a23e6bca2e, type: 3}
+  m_Script: {fileID: 11500000, guid: e197ea0b72c1edb4786cb1015d8b217a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skyboxMaterials:
-  - {fileID: 2100000, guid: 896fe09c49b73a44ead00a982ee46e6b, type: 2}
-  - {fileID: 2100000, guid: 170f2a047c448444ca1b8e2d20f504f1, type: 2}

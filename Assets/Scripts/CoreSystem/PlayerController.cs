@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -18,6 +17,8 @@ public class PlayerController : MonoBehaviour
     private Vector3 moveSideScale;
 
     public bool airborne = false;
+    public bool isInvulnerable = false; // 무적 상태를 나타내는 변수
+    public float invulnerabilityDuration = 2f; // 무적 지속 시간
 
     private CameraMove cameraMove;
 
@@ -26,12 +27,12 @@ public class PlayerController : MonoBehaviour
         playerRigidbody = GetComponent<Rigidbody>();
         iniScale = transform.localScale;
         moveSideScale = iniScale - new Vector3(iniScale.x / 8, 0, 0);
-        cameraMove = Camera.main.GetComponent<CameraMove>(); // CameraMove 컴포넌트를 찾기
+        cameraMove = Camera.main.GetComponent<CameraMove>();
     }
 
     void Update()
     {
-        speed = GameManager.instance.GetMovementSpeed(); // BPM에 따른 속도 업데이트
+        speed = GameManager.instance.GetMovementSpeed();
         Move();
 
         if (gameObject.transform.position.y <= -2.5f)
@@ -60,9 +61,9 @@ public class PlayerController : MonoBehaviour
             if (Mathf.Abs(currentAcceleration) < maxAccSide || currentAcceleration < 0) currentAcceleration += Time.deltaTime * accelerationRate;
             MoveSideScale(true);
         }
-        
+
         transform.Translate(currentAcceleration * Time.deltaTime, 0.0f, 0.0f);
-        transform.Translate(0.0f, 0.0f, speed * Time.deltaTime); // BPM에 따라 속도 적용
+        transform.Translate(0.0f, 0.0f, speed * Time.deltaTime);
     }
 
     private void MoveSideScale(bool moveSide)
@@ -73,7 +74,7 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Enemy"))
+        if (collision.gameObject.CompareTag("Enemy") && !isInvulnerable) // 무적 상태가 아닐 때만 데미지
         {
             Die();
         }
@@ -81,7 +82,26 @@ public class PlayerController : MonoBehaviour
     
     void Die()
     {
+        Debug.Log("Player died at position: " + transform.position);
         gameObject.SetActive(false);
         cameraMove.shake = true;
+
+        GameManager.instance.ShowRestartButtons();
+    }
+
+    public void StartInvulnerability()
+    {
+        StartCoroutine(InvulnerabilityCoroutine());
+    }
+
+    private IEnumerator InvulnerabilityCoroutine()
+    {
+        isInvulnerable = true; // 무적 상태로 설정
+        // 플레이어의 외형이나 효과 추가: 예를 들어, 색상을 변경하거나 애니메이션 추가
+
+        yield return new WaitForSeconds(invulnerabilityDuration); // 지정된 시간 동안 대기
+
+        isInvulnerable = false; // 무적 상태 해제
+        // 무적 해제 후 외형 복원
     }
 }

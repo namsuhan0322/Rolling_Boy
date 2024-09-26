@@ -69,4 +69,26 @@ public class LevelCreator : MonoBehaviour
             tile.SetActive(distance <= viewDistance && !isBehindPlayer);
         }
     }
+    
+    public void ResetMap()
+    {
+        // 기존에 생성된 타일들 삭제
+        foreach (GameObject tile in createdTiles)
+        {
+            Destroy(tile);
+        }
+    
+        createdTiles.Clear(); // 리스트 초기화
+
+        // 다시 맵을 생성
+        StreamReader reader = sourceFile.OpenText();
+        string text = reader.ReadLine();
+    
+        for (int i = 0; text != null; ++i) 
+        {
+            createRow(i, text);
+            text = reader.ReadLine();
+            allBlock++;
+        }
+    }
 }
