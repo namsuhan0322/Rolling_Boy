@@ -29,7 +29,6 @@ public class Attachment_Rolling_Cylinder_Right : MonoBehaviour
         
         if (playerInRange.Length > 0)
         {
-            Debug.Log("범위 안에 들어옴!");
             isMoving = true; // 이동 시작
         }
         else

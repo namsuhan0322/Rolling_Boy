@@ -12,27 +12,13 @@ public class LevelCreator : MonoBehaviour
 
     private List<GameObject> createdTiles = new List<GameObject>();
 
-    //게임 진행도에 나타낼 변수값
+    // 게임 진행도에 나타낼 변수값
     public int allBlock = 1;
 
     void Start()
     {
-        if (GameManager.instance != null)
-        {
-            sourceFile = new FileInfo("Assets/Levels/Level" + GameManager.instance.currentLevel + ".txt");
-        }
-
-        StreamReader reader = sourceFile.OpenText();
-        string text = reader.ReadLine();
-
-        for (int i = 0; text != null; ++i) 
-        {
-            createRow(i, text);
-            text = reader.ReadLine();
-            allBlock++;
-        }
-
-        UpdateTileVisibility(); // 시작 시 타일 가시성 업데이트
+        // 처음 레벨 로드
+        LoadMap();
     }
 
     private void Update()
@@ -45,11 +31,18 @@ public class LevelCreator : MonoBehaviour
         for (int i = 0; i < 5; i++) 
         {
             int tileType = rowInfo[i] - 'a';
-            if (tileType >= 0 && tileType < tiles.Length)
+
+            if (tileType == 16)
+            {
+                GameObject finishTile = Instantiate(tiles[tileType], new Vector3(i, 0, zPos), Quaternion.identity, destinationObject.transform);
+                finishTile.GetComponent<FinishTIle>().isFinishTile = true;
+                createdTiles.Add(finishTile);
+            }
+            else if (tileType >= 0 && tileType < tiles.Length)
             {
                 GameObject tile = Instantiate(tiles[tileType], new Vector3(i, 0, zPos), Quaternion.identity, destinationObject.transform);
-                tile.SetActive(false); // 초기 생성 시 비활성화
-                createdTiles.Add(tile); // 생성한 타일을 리스트에 추가
+                tile.SetActive(false);
+                createdTiles.Add(tile);
             }
         }
     }
@@ -69,7 +62,7 @@ public class LevelCreator : MonoBehaviour
             tile.SetActive(distance <= viewDistance && !isBehindPlayer);
         }
     }
-    
+
     public void ResetMap()
     {
         // 기존에 생성된 타일들 삭제
@@ -77,18 +70,28 @@ public class LevelCreator : MonoBehaviour
         {
             Destroy(tile);
         }
-    
-        createdTiles.Clear(); // 리스트 초기화
 
-        // 다시 맵을 생성
+        createdTiles.Clear(); // 리스트 초기화
+    }
+
+    public void LoadMap()
+    {
+        // 현재 레벨의 파일 경로 설정
+        if (GameManager.instance != null)
+        {
+            sourceFile = new FileInfo("Assets/Levels/Level" + GameManager.instance.currentLevel + ".txt");
+        }
+
         StreamReader reader = sourceFile.OpenText();
         string text = reader.ReadLine();
-    
-        for (int i = 0; text != null; ++i) 
+
+        for (int i = 0; text != null; ++i)
         {
             createRow(i, text);
             text = reader.ReadLine();
             allBlock++;
         }
+
+        UpdateTileVisibility(); // 타일 가시성 업데이트
     }
 }

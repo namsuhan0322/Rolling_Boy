@@ -82,7 +82,6 @@ public class PlayerController : MonoBehaviour
     
     void Die()
     {
-        Debug.Log("Player died at position: " + transform.position);
         gameObject.SetActive(false);
         cameraMove.shake = true;
 

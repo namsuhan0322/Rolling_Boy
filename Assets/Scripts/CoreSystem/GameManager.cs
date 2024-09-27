@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -14,6 +15,9 @@ public class GameManager : MonoBehaviour
     public GameObject player;
     public GameObject restartFromCheckpointButton; // 체크포인트에서 다시하기 버튼
     public GameObject restartFromBeginningButton;  // 처음부터 다시하기 버튼
+    
+    public GameObject nextStageButton; // 버튼을 연결할 GameObject
+    public GameObject returnToMainMenuButton; // 메인 메뉴로 돌아가는 버튼
 
     public float GetMovementSpeed(float distancePerBeat = 5f) 
     {
@@ -55,19 +59,21 @@ public class GameManager : MonoBehaviour
         }
         else 
         {
+            // 초기 스폰 위치 사용
             player.transform.position = new Vector3(2f, 0.3218206f, 0.6643624f);
         }
 
         restartFromCheckpointButton.SetActive(false);
         restartFromBeginningButton.SetActive(false);
-    
+
         player.GetComponent<PlayerController>().StartInvulnerability(); // 무적 상태 시작
-        
-        // LevelCreator 인스턴스를 찾고 리셋 호출
+
+        // LevelCreator 초기화 및 맵 로드
         LevelCreator levelCreator = FindObjectOfType<LevelCreator>();
         if (levelCreator != null)
         {
             levelCreator.ResetMap(); // 맵 초기화
+            levelCreator.LoadMap();  // 맵 다시 로드
         }
     }
     
@@ -90,14 +96,10 @@ public class GameManager : MonoBehaviour
     public void RestartFromBeginning()
     {
         checkpointSet = false; // 체크포인트 초기화
-    
+        
         if (player != null)
         {
             RespawnPlayer(player); // 플레이어 리스폰
-        }
-        else
-        {
-            Debug.LogError("Player 오브젝트가 설정되지 않았습니다.");
         }
     }
 
@@ -119,5 +121,58 @@ public class GameManager : MonoBehaviour
     {
         lastCheckpointPosition = checkpointPosition;
         checkpointSet = true;
+    }
+    
+    public void OnFinishReached()
+    {
+        // 게임이 끝났음을 알리고 버튼을 활성화
+        if (currentLevel == 3)
+        {
+            returnToMainMenuButton.SetActive(true);
+            restartFromCheckpointButton.SetActive(false);
+            restartFromBeginningButton.SetActive(false);
+            Time.timeScale = 0f;
+        }
+        else
+        {
+            nextStageButton.SetActive(true);
+            Time.timeScale = 0f;
+        }
+    }
+
+    public void ProceedToNextStage()
+    {
+        nextStageButton.SetActive(false);
+
+        // 마지막 스테이지가 Level3일 때 (이 부분은 예시)
+        if (currentLevel == 3)
+        {
+            OnFinishReached();
+        }
+        else
+        {
+            currentLevel++; // 스테이지 증가
+            Debug.Log("Proceeding to next stage. Current level: " + currentLevel);
+
+            checkpointSet = false; // 체크포인트 초기화
+
+            RespawnPlayer(player); // 플레이어 리스폰
+
+            LevelCreator levelCreator = FindObjectOfType<LevelCreator>();
+            if (levelCreator != null)
+            {
+                levelCreator.ResetMap(); // 기존 맵 초기화
+                levelCreator.LoadMap();  // 새로운 맵 로드
+            }
+
+            StartCoroutine(GameStateManager.instance.StartGameWithDelay(3f)); // 클릭 후 게임 시작
+        }
+    }
+
+    // 메인 화면으로 돌아가는 버튼 클릭 시
+    public void ReturnToMainMenu()
+    {
+        Time.timeScale = 1f; // 게임 속도를 다시 정상화
+        SceneManager.LoadScene("MainScene"); // 메인 메뉴로 이동
     }
 }
