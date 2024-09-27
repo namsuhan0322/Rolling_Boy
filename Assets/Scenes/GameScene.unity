@@ -141,7 +141,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1008052
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -536,7 +536,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 632475040}
         m_TargetAssemblyTypeName: UiManager2, Assembly-CSharp
-        m_MethodName: GoBackMain
+        m_MethodName: ReturnToMainMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1462,7 +1462,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 632475040}
         m_TargetAssemblyTypeName: UiManager2, Assembly-CSharp
-        m_MethodName: GoBackMain
+        m_MethodName: ReturnToMainMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2097,6 +2097,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3e9dd1808a84c3408da5826b3aab314, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  currentLevel: 1
   bpm: 120
   player: {fileID: 1808110610}
   restartFromCheckpointButton: {fileID: 0}
@@ -2595,7 +2596,7 @@ GameObject:
   - component: {fileID: 920405107}
   - component: {fileID: 920405106}
   m_Layer: 5
-  m_Name: Play_Button
+  m_Name: RestartFormBegin_Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2617,7 +2618,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -415}
+  m_AnchoredPosition: {x: 0, y: -470}
   m_SizeDelta: {x: 250, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &920405106
@@ -2666,7 +2667,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 632475040}
         m_TargetAssemblyTypeName: UiManager2, Assembly-CSharp
-        m_MethodName: ReStartGame
+        m_MethodName: RestartGame
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2798,7 +2799,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 632475040}
         m_TargetAssemblyTypeName: UiManager2, Assembly-CSharp
-        m_MethodName: ReStartGame
+        m_MethodName: RestartFromBeginning
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3005,7 +3006,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 632475040}
         m_TargetAssemblyTypeName: UiManager2, Assembly-CSharp
-        m_MethodName: GoBackMain
+        m_MethodName: ReturnToMainMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3750,7 +3751,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 632475040}
         m_TargetAssemblyTypeName: UiManager2, Assembly-CSharp
-        m_MethodName: GoBackMain
+        m_MethodName: ReturnToMainMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4410,7 +4411,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 632475040}
         m_TargetAssemblyTypeName: UiManager2, Assembly-CSharp
-        m_MethodName: PlayNextGame
+        m_MethodName: ProceedToNextStage
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4582,7 +4583,7 @@ GameObject:
   - component: {fileID: 1895129797}
   - component: {fileID: 1895129796}
   m_Layer: 5
-  m_Name: Play_Image
+  m_Name: Play_Image_01
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4604,7 +4605,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -415}
+  m_AnchoredPosition: {x: 0, y: -470}
   m_SizeDelta: {x: 250, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1895129796
