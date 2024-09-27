@@ -84,8 +84,6 @@ public class PlayerController : MonoBehaviour
     {
         gameObject.SetActive(false);
         cameraMove.shake = true;
-
-        GameManager.instance.ShowRestartButtons();
     }
 
     public void StartInvulnerability()

@@ -6,11 +6,11 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance = null;
-    public int currentLevel { get; private set; } = 1;
+    public int currentLevel = 1;
     public float bpm = 120f; // BPM 기본값
 
-    private Vector3 lastCheckpointPosition;
-    private bool checkpointSet = false;
+    //private Vector3 lastCheckpointPosition;
+    //private bool checkpointSet = false;
     
     public GameObject player;
     public GameObject restartFromCheckpointButton; // 체크포인트에서 다시하기 버튼
@@ -47,11 +47,11 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void RespawnPlayer(GameObject player)
+    /*public void RespawnPlayer(GameObject player)
     {
         player.SetActive(true);
 
-        if (checkpointSet) 
+        if (checkpointSet)
         {
             Vector3 respawnPosition = lastCheckpointPosition;
             respawnPosition.y = Mathf.Max(respawnPosition.y + 1f, 0f); // Y 좌표를 최소 0으로 설정
@@ -63,7 +63,8 @@ public class GameManager : MonoBehaviour
             player.transform.position = new Vector3(2f, 0.3218206f, 0.6643624f);
         }
 
-        restartFromCheckpointButton.SetActive(false);
+
+        restartFromCheckpointButton.SetActive(false);  
         restartFromBeginningButton.SetActive(false);
 
         player.GetComponent<PlayerController>().StartInvulnerability(); // 무적 상태 시작
@@ -82,12 +83,12 @@ public class GameManager : MonoBehaviour
     {
         if (checkpointSet)
         {
-            restartFromCheckpointButton.SetActive(true); // 체크포인트에서 다시하기 버튼 활성화
+            restartFromCheckpointButton.SetActive(true);
             restartFromBeginningButton.SetActive(false);
         }
         else
         {
-            restartFromCheckpointButton.SetActive(false); // 체크포인트가 없으면 비활성화
+            restartFromCheckpointButton.SetActive(false);
             restartFromBeginningButton.SetActive(true);
         }
     }
@@ -128,6 +129,7 @@ public class GameManager : MonoBehaviour
         // 게임이 끝났음을 알리고 버튼을 활성화
         if (currentLevel == 3)
         {
+
             returnToMainMenuButton.SetActive(true);
             restartFromCheckpointButton.SetActive(false);
             restartFromBeginningButton.SetActive(false);
@@ -174,5 +176,5 @@ public class GameManager : MonoBehaviour
     {
         Time.timeScale = 1f; // 게임 속도를 다시 정상화
         SceneManager.LoadScene("MainScene"); // 메인 메뉴로 이동
-    }
+    }*/
 }

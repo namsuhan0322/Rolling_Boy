@@ -109,6 +109,6 @@ public class UiManager : MonoBehaviour
             Debug.Log(setActive[i]);
         }
 
-        LoadingSceneController.LoadScene("Test_GameScene");  //юс╫ц
+        LoadingSceneController.LoadScene("GameScene");
     }
 }
