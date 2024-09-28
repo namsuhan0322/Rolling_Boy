@@ -42,7 +42,6 @@ GameObject:
   - component: {fileID: 1173373434666368053}
   - component: {fileID: 977143062850941653}
   - component: {fileID: 1634100294100197883}
-  - component: {fileID: 3772247576645393003}
   - component: {fileID: 2703878726283671923}
   m_Layer: 0
   m_Name: Crasher
@@ -60,7 +59,7 @@ Transform:
   m_GameObject: {fileID: 4379606174694805379}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.9440002, z: 0}
+  m_LocalPosition: {x: 0, y: 0.4050001, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -117,33 +116,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!1773428102 &3772247576645393003
-ParentConstraint:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4379606174694805379}
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Weight: 1
-  m_TranslationAtRest: {x: 0, y: 0.4050001, z: 0}
-  m_RotationAtRest: {x: 0, y: 0, z: 0}
-  m_TranslationOffsets:
-  - {x: 0, y: 0, z: 0}
-  m_RotationOffsets:
-  - {x: 0, y: 0, z: 0}
-  m_AffectTranslationX: 1
-  m_AffectTranslationY: 1
-  m_AffectTranslationZ: 1
-  m_AffectRotationX: 1
-  m_AffectRotationY: 1
-  m_AffectRotationZ: 1
-  m_Active: 1
-  m_IsLocked: 1
-  m_Sources:
-  - sourceTransform: {fileID: 3769875334588937940}
-    weight: 1
 --- !u!65 &2703878726283671923
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -316,7 +288,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90620e47f8726be4e99db7b44bf30e7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  baseSpeed: 5
 --- !u!1 &8829195161058475692
 GameObject:
   m_ObjectHideFlags: 0
