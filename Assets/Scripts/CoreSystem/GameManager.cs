@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance = null;
     public int currentLevel = 1;
     public float bpm = 120f; // BPM 기본값
+    public float beatInterval; //UiManager2로가 가져가기 위해서
 
     //private Vector3 lastCheckpointPosition;
     //private bool checkpointSet = false;
@@ -19,9 +20,9 @@ public class GameManager : MonoBehaviour
     public GameObject nextStageButton; // 버튼을 연결할 GameObject
     public GameObject returnToMainMenuButton; // 메인 메뉴로 돌아가는 버튼
 
-    public float GetMovementSpeed(float distancePerBeat = 5f) 
+    public float GetMovementSpeed(float distancePerBeat = 5f) //5였음
     {
-        float beatInterval = 60f / bpm; // 1비트당 시간 (초)
+        beatInterval = 60f / bpm; // 1비트당 시간 (초)
         float speed = distancePerBeat / beatInterval; // 이동 속도 계산
         return speed;
     }

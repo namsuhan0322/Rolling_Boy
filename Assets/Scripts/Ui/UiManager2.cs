@@ -42,10 +42,20 @@ public class UiManager2 : MonoBehaviour
     private static Vector3 lastCheckpointPosition;
     private static bool checkpointSet = false;
     //------------------------------------------------
-    private bool Ischeck = false;
+    public static UiManager2 Instance;
 
     private void Awake()
     {
+        if (Instance == null)
+        {
+            Instance = this;
+            //DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+
         levelCreator = FindObjectOfType<LevelCreator>();
         player = GameObject.Find("Player");
     }
@@ -62,6 +72,7 @@ public class UiManager2 : MonoBehaviour
         }
         //최고점수 저장
         bestScore = PlayerPrefs.GetFloat("BestScore");
+
     }
 
     void Update()
@@ -77,7 +88,7 @@ public class UiManager2 : MonoBehaviour
         }
     }
 
-    public void CheckClearGame()
+    public void CheckClearGame() //성공, 실패여부를 체크하는 메서드
     {
         if (player.activeSelf == false)
         {
@@ -90,18 +101,20 @@ public class UiManager2 : MonoBehaviour
         }
     }
 
-    //실시간으로 점수 체크하는 메서드
-    public void CheckScore()
+    public void CheckScore()    //실시간으로 점수 체크하는 메서드
     {
-        allBlock = levelCreator.allBlock;
+        allBlock = levelCreator.allBlock ;
+        allBlock = Mathf.CeilToInt(allBlock * GameManager.instance.beatInterval);
         currentBlock = player.transform.position.z + 1;
         point = currentBlock / allBlock;
-        realTimeProgress.text = string.Format("{0}%", Mathf.Ceil(point * 100).ToString());     //실시간 게임진행도표시
+
+        float processPoint = Mathf.Ceil(Mathf.Min(point * 100, 100f));
+        realTimeProgress.text = string.Format("{0}%", processPoint.ToString());     //실시간 게임진행도표시
     }
 
+    //버튼메서드 , 게임완료 메서드
 
-    //버튼에 붙일 메서드 + 게임종료 메서드
-    public void StartGame()
+    public void StartGame() //게임시작 UI설정
     {
         if (GameStateManager.instance.isGameRunning)
         {
@@ -116,19 +129,19 @@ public class UiManager2 : MonoBehaviour
 
     }
 
-    public void PausePlay()
+    public void PausePlay() //게임 일시정지
     {
         gameUI2[3].SetActive(true);
     }
 
-    public void ContinueGame()
+    public void ContinueGame() //게임 정지취소
     {
         gameUI2[3].SetActive(false);
         gameUI2[2].SetActive(true);
         Time.timeScale = 1f;
     }
 
-    public void GameOver()  //BestScore, BestScore_st 정적변수 설정
+    public void GameOver()  //게임완료메서드        BestScore, BestScore_st 정적변수 설정
     {
         if (point >= 1)
         {
@@ -169,14 +182,12 @@ public class UiManager2 : MonoBehaviour
 
         if (checkpointSet)
         {
-            Debug.Log("왜 됨?");
             Vector3 respawnPosition = lastCheckpointPosition;
             respawnPosition.y = Mathf.Max(respawnPosition.y + 1f, 0f); // Y 좌표를 최소 0으로 설정
             player.transform.position = respawnPosition;
         }
         else 
         {
-            Debug.Log("안 됨?");
             // 초기 스폰 위치 사용
             player.transform.position = new Vector3(2f, 0.3218206f, 0.6643624f);
         }
@@ -197,7 +208,6 @@ public class UiManager2 : MonoBehaviour
     public void RestartGame()
     {
         checkpointSet = false; // 체크포인트 초기화
-        Ischeck = false;
         
         if (player != null)
         {
@@ -217,8 +227,8 @@ public class UiManager2 : MonoBehaviour
         // 게임이 끝났음을 알리고 버튼을 활성화
         if (GameManager.instance.currentLevel == 3)
         {
-            //다음으로 가는 버튼 비활성화
-            //다시하기 버튼 가운데로 이동
+            //기존 게임클리어UI에서 다음으로 가는 버튼 비활성화
+            //다시하기 버튼 가운데로 이동 추가예정
 
             Time.timeScale = 0f;
         }
@@ -226,17 +236,20 @@ public class UiManager2 : MonoBehaviour
 
     public void ProceedToNextStage()
     {
-
+        Debug.Log("된다");
+        int currentLevel = GameManager.instance.currentLevel;
         // 마지막 스테이지가 Level3일 때 (이 부분은 예시)
-        if (GameManager.instance.currentLevel == 3)
+        if (currentLevel == 3)
         {
             OnFinishReached();
         }
         else
         {
-            GameManager.instance.currentLevel++; // 스테이지 증가
-            Debug.Log("Proceeding to next stage. Current level: " + GameManager.instance.currentLevel);
 
+            currentLevel++; // 스테이지 증가
+            Debug.Log("Proceeding to next stage. Current level: " + currentLevel);
+
+            GameManager.instance.currentLevel = currentLevel;
             checkpointSet = false; // 체크포인트 초기화
 
             LevelCreator levelCreator = FindObjectOfType<LevelCreator>();
@@ -245,7 +258,9 @@ public class UiManager2 : MonoBehaviour
                 levelCreator.ResetMap(); // 기존 맵 초기화
                 levelCreator.LoadMap();  // 새로운 맵 로드
             }
+
             SceneManager.LoadScene("GameScene");
+
             //StartCoroutine(GameStateManager.instance.StartGameWithDelay(3f)); // 클릭 후 게임 시작
         }
     }
