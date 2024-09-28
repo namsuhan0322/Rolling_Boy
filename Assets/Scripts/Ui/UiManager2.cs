@@ -223,7 +223,6 @@ public class UiManager2 : MonoBehaviour
 
     public void SetCheckpoint(Vector3 checkpointPosition)
     {
-        Debug.Log("µÈ´Ù");
         lastCheckpointPosition = checkpointPosition;
         checkpointSet = true;
     }

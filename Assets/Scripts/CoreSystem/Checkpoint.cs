@@ -5,13 +5,20 @@ using UnityEngine.UI;
 
 public class Checkpoint : MonoBehaviour
 {
+    private UiManager3 uiManager3;
     private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player")) // 플레이어와 충돌 시
         {
 
             UiManager2.Instance.SetCheckpoint(transform.position); // 체크포인트 위치 저장
+            uiManager3.SetCheckpoint(transform.position);
         }
+
+    }
+    private void Start()
+    {
+        uiManager3 = FindObjectOfType<UiManager3>();
     }
 
     //테스트용 코드
