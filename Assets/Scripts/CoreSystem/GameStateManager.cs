@@ -11,6 +11,7 @@ public class GameStateManager : MonoBehaviour
         if (instance == null)
         {
             instance = this;
+            //DontDestroyOnLoad(this);
         }
         else
         {
