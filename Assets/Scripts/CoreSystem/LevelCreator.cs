@@ -4,7 +4,7 @@ using System.IO;
 
 public class LevelCreator : MonoBehaviour
 {
-    [SerializeField] private FileInfo sourceFile = new FileInfo("Assets/Levels/Level1Backup.txt");
+    [SerializeField] private FileInfo sourceFile = new FileInfo("Assets/Levels/Level1.txt");
     [SerializeField] private GameObject[] tiles;
     [SerializeField] private GameObject destinationObject;
     [SerializeField] private GameObject mainCamera;

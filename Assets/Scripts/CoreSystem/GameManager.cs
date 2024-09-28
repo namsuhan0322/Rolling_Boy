@@ -37,9 +37,7 @@ public class GameManager : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0) && !GameStateManager.instance.isGameRunning)
         {
-            StartCoroutine(GameStateManager.instance.StartGameWithDelay(3f));
+            StartCoroutine(GameStateManager.instance.StartGameWithDelay(1f));
         }
     }
-
-    
 }

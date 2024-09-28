@@ -33,12 +33,12 @@ public class UiManager2 : MonoBehaviour
 
     private float point;
     private float bestScore;
-    private int diaMond_N = 0;  //´ÙÀÌ¾Æ¸óµå °³¼ö¸¦ ³ÖÀ» º¯¼ö
+    private int diaMond_N = 0;  //ï¿½ï¿½ï¿½Ì¾Æ¸ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     private int allDiaMond_N = 10;
 
     public static bool isStartSetting = false;
 
-    //¿Å±ä ÄÚµå--------------------------------------------
+    //ï¿½Å±ï¿½ ï¿½Úµï¿½--------------------------------------------
     private static Vector3 lastCheckpointPosition;
     private static bool checkpointSet = false;
     //------------------------------------------------
@@ -62,15 +62,15 @@ public class UiManager2 : MonoBehaviour
 
     private void Start()
     {
-        RespawnPlayer(player); // ÇÃ·¹ÀÌ¾î ¸®½ºÆù
+        RespawnPlayer(player); // ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 
-        //UIÃÊ±âÈ­
+        //UIï¿½Ê±ï¿½È­
         gameUI2[0].SetActive(true);
         for (int i = 1; i < gameUI2.Length; i++)
         {
             gameUI2[i].SetActive(false);
         }
-        //ÃÖ°íÁ¡¼ö ÀúÀå
+        //ï¿½Ö°ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
         bestScore = PlayerPrefs.GetFloat("BestScore");
 
     }
@@ -84,24 +84,24 @@ public class UiManager2 : MonoBehaviour
         if (gameUI2[3].activeSelf == true)
         {
             gameUI2[2].SetActive(false);
-            Time.timeScale = 0f;          //PausePlay()¿¡ ³Ö¾úÀ» ¶§, ½Ã°£Á¤ÁöÈÄ UIÈ­¸éÀÌ ¾È¶ß´Â ¿À·ù¹ß»ýÇØ¼­ ¾¸.
+            Time.timeScale = 0f;          //PausePlay()ï¿½ï¿½ ï¿½Ö¾ï¿½ï¿½ï¿½ ï¿½ï¿½, ï¿½Ã°ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ UIÈ­ï¿½ï¿½ï¿½ï¿½ ï¿½È¶ß´ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ß»ï¿½ï¿½Ø¼ï¿½ ï¿½ï¿½.
         }
     }
 
-    public void CheckClearGame() //¼º°ø, ½ÇÆÐ¿©ºÎ¸¦ Ã¼Å©ÇÏ´Â ¸Þ¼­µå
+    public void CheckClearGame() //ï¿½ï¿½ï¿½ï¿½, ï¿½ï¿½ï¿½Ð¿ï¿½ï¿½Î¸ï¿½ Ã¼Å©ï¿½Ï´ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
     {
         if (player.activeSelf == false)
         {
             GameOver();
         }
 
-        if (player.transform.position.z >= allBlock)  //°ÔÀÓ Å¬¸®¾îÁ¶°Ç
+        if (player.transform.position.z >= allBlock)  //ï¿½ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
         {
             GameOver();
         }
     }
 
-    public void CheckScore()    //½Ç½Ã°£À¸·Î Á¡¼ö Ã¼Å©ÇÏ´Â ¸Þ¼­µå
+    public void CheckScore()    //ï¿½Ç½Ã°ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ Ã¼Å©ï¿½Ï´ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
     {
         allBlock = levelCreator.allBlock ;
         allBlock = Mathf.CeilToInt(allBlock * GameManager.instance.beatInterval);
@@ -109,12 +109,12 @@ public class UiManager2 : MonoBehaviour
         point = currentBlock / allBlock;
 
         float processPoint = Mathf.Ceil(Mathf.Min(point * 100, 100f));
-        realTimeProgress.text = string.Format("{0}%", processPoint.ToString());     //½Ç½Ã°£ °ÔÀÓÁøÇàµµÇ¥½Ã
+        realTimeProgress.text = string.Format("{0}%", processPoint.ToString());     //ï¿½Ç½Ã°ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½àµµÇ¥ï¿½ï¿½
     }
 
-    //¹öÆ°¸Þ¼­µå , °ÔÀÓ¿Ï·á ¸Þ¼­µå
+    //ï¿½ï¿½Æ°ï¿½Þ¼ï¿½ï¿½ï¿½ , ï¿½ï¿½ï¿½Ó¿Ï·ï¿½ ï¿½Þ¼ï¿½ï¿½ï¿½
 
-    public void StartGame() //°ÔÀÓ½ÃÀÛ UI¼³Á¤
+    public void StartGame() //ï¿½ï¿½ï¿½Ó½ï¿½ï¿½ï¿½ UIï¿½ï¿½ï¿½ï¿½
     {
         if (GameStateManager.instance.isGameRunning)
         {
@@ -129,19 +129,19 @@ public class UiManager2 : MonoBehaviour
 
     }
 
-    public void PausePlay() //°ÔÀÓ ÀÏ½ÃÁ¤Áö
+    public void PausePlay() //ï¿½ï¿½ï¿½ï¿½ ï¿½Ï½ï¿½ï¿½ï¿½ï¿½ï¿½
     {
         gameUI2[3].SetActive(true);
     }
 
-    public void ContinueGame() //°ÔÀÓ Á¤ÁöÃë¼Ò
+    public void ContinueGame() //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
     {
         gameUI2[3].SetActive(false);
         gameUI2[2].SetActive(true);
         Time.timeScale = 1f;
     }
 
-    public void GameOver()  //°ÔÀÓ¿Ï·á¸Þ¼­µå        BestScore, BestScore_st Á¤Àûº¯¼ö ¼³Á¤
+    public void GameOver()  //ï¿½ï¿½ï¿½Ó¿Ï·ï¿½Þ¼ï¿½ï¿½ï¿½        BestScore, BestScore_st ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     {
         if (point >= 1)
         {
@@ -155,7 +155,7 @@ public class UiManager2 : MonoBehaviour
             PlayerPrefs.Save();
         }
 
-        if (player.activeSelf == false)  //°ÔÀÓ Å¬¸®¾î½Ã ÇÃ·¹ÀÌ¾îÀÇ Áß·Â°ªÀ» 0À¸·Î ÇØ¼­ ÆÇ´Ü.
+        if (player.activeSelf == false)  //ï¿½ï¿½ï¿½ï¿½ Å¬ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ã·ï¿½ï¿½Ì¾ï¿½ï¿½ï¿½ ï¿½ß·Â°ï¿½ï¿½ï¿½ 0ï¿½ï¿½ï¿½ï¿½ ï¿½Ø¼ï¿½ ï¿½Ç´ï¿½.
         {
             gameUI2[2].SetActive(false);
             gameUI2[4].SetActive(true);
@@ -174,7 +174,7 @@ public class UiManager2 : MonoBehaviour
             diaMond_N_Text_2.text = string.Format("{0}/{1}", diaMond_N, allDiaMond_N);
         }
     }
-//------------------------------------------------------------------------------------------------------------¿Å°Ü¿Â ÄÚµå
+//------------------------------------------------------------------------------------------------------------ï¿½Å°Ü¿ï¿½ ï¿½Úµï¿½
 
     public void RespawnPlayer(GameObject player)
     {
@@ -182,36 +182,37 @@ public class UiManager2 : MonoBehaviour
         if (checkpointSet)
         {
             Vector3 respawnPosition = lastCheckpointPosition;
-            respawnPosition.y = Mathf.Max(respawnPosition.y + 1f, 0f); // Y ÁÂÇ¥¸¦ ÃÖ¼Ò 0À¸·Î ¼³Á¤
+            respawnPosition.y = Mathf.Max(respawnPosition.y + 1f, 0f); // Y ï¿½ï¿½Ç¥ï¿½ï¿½ ï¿½Ö¼ï¿½ 0ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             player.transform.position = respawnPosition;
         }
         else 
         {
-            // ÃÊ±â ½ºÆù À§Ä¡ »ç¿ë
+            // ï¿½Ê±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ä¡ ï¿½ï¿½ï¿½
             player.transform.position = new Vector3(2f, 0.3218206f, 0.6643624f);
         }
 
-        player.GetComponent<PlayerController>().StartInvulnerability(); // ¹«Àû »óÅÂ ½ÃÀÛ
+        player.GetComponent<PlayerController>().StartInvulnerability(); // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
-        // LevelCreator ÃÊ±âÈ­ ¹× ¸Ê ·Îµå
+        // LevelCreator ï¿½Ê±ï¿½È­ ï¿½ï¿½ ï¿½ï¿½ ï¿½Îµï¿½
         LevelCreator levelCreator = FindObjectOfType<LevelCreator>();
         if (levelCreator != null)
         {
-            levelCreator.ResetMap(); // ¸Ê ÃÊ±âÈ­
-            levelCreator.LoadMap();  // ¸Ê ´Ù½Ã ·Îµå
+            levelCreator.ResetMap(); // ï¿½ï¿½ ï¿½Ê±ï¿½È­
+            levelCreator.LoadMap();  // ï¿½ï¿½ ï¿½Ù½ï¿½ ï¿½Îµï¿½
         }
     }
 
-    // Ã³À½ºÎÅÍ ´Ù½Ã ½ÃÀÛÇÏ´Â ¹öÆ° Å¬¸¯ ½Ã
+    // Ã³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ù½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½Æ° Å¬ï¿½ï¿½ ï¿½ï¿½
     public void RestartBeginning()
     {
-        checkpointSet = false; // Ã¼Å©Æ÷ÀÎÆ® ÃÊ±âÈ­
+        checkpointSet = false; // Ã¼Å©ï¿½ï¿½ï¿½ï¿½Æ® ï¿½Ê±ï¿½È­
         
         if (player != null)
         {
             SceneManager.LoadScene("GameScene");
         }
     }
+    
     public void RestartCheckPoint()
     {
 
@@ -223,18 +224,18 @@ public class UiManager2 : MonoBehaviour
 
     public void SetCheckpoint(Vector3 checkpointPosition)
     {
-        Debug.Log("µÈ´Ù");
+        Debug.Log("ï¿½È´ï¿½");
         lastCheckpointPosition = checkpointPosition;
         checkpointSet = true;
     }
     
     public void OnFinishReached()
     {
-        // °ÔÀÓÀÌ ³¡³µÀ½À» ¾Ë¸®°í ¹öÆ°À» È°¼ºÈ­
-        if (GameManager.instance.currentLevel == 3)
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½Ë¸ï¿½ï¿½ï¿½ ï¿½ï¿½Æ°ï¿½ï¿½ È°ï¿½ï¿½È­
+        if (GameManager.instance.currentLevel == 4)
         {
-            //±âÁ¸ °ÔÀÓÅ¬¸®¾îUI¿¡¼­ ´ÙÀ½À¸·Î °¡´Â ¹öÆ° ºñÈ°¼ºÈ­
-            //´Ù½ÃÇÏ±â ¹öÆ° °¡¿îµ¥·Î ÀÌµ¿ Ãß°¡¿¹Á¤
+            //ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½Å¬ï¿½ï¿½ï¿½ï¿½UIï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Æ° ï¿½ï¿½È°ï¿½ï¿½È­
+            //ï¿½Ù½ï¿½ï¿½Ï±ï¿½ ï¿½ï¿½Æ° ï¿½ï¿½ï¿½îµ¥ï¿½ï¿½ ï¿½Ìµï¿½ ï¿½ß°ï¿½ï¿½ï¿½ï¿½ï¿½
 
             Time.timeScale = 0f;
         }
@@ -242,40 +243,39 @@ public class UiManager2 : MonoBehaviour
 
     public void ProceedToNextStage()
     {
-        Debug.Log("µÈ´Ù");
+        Debug.Log("ï¿½È´ï¿½");
         int currentLevel = GameManager.instance.currentLevel;
-        // ¸¶Áö¸· ½ºÅ×ÀÌÁö°¡ Level3ÀÏ ¶§ (ÀÌ ºÎºÐÀº ¿¹½Ã)
-        if (currentLevel == 3)
+        // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Level3ï¿½ï¿½ ï¿½ï¿½ (ï¿½ï¿½ ï¿½Îºï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½)
+        if (currentLevel == 4)
         {
             OnFinishReached();
         }
         else
         {
-
-            currentLevel++; // ½ºÅ×ÀÌÁö Áõ°¡
+            currentLevel++; // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
             Debug.Log("Proceeding to next stage. Current level: " + currentLevel);
 
             GameManager.instance.currentLevel = currentLevel;
-            checkpointSet = false; // Ã¼Å©Æ÷ÀÎÆ® ÃÊ±âÈ­
+            checkpointSet = false; // Ã¼Å©ï¿½ï¿½ï¿½ï¿½Æ® ï¿½Ê±ï¿½È­
 
             LevelCreator levelCreator = FindObjectOfType<LevelCreator>();
             if (levelCreator != null)
             {
-                levelCreator.ResetMap(); // ±âÁ¸ ¸Ê ÃÊ±âÈ­
-                levelCreator.LoadMap();  // »õ·Î¿î ¸Ê ·Îµå
+                levelCreator.ResetMap(); // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ê±ï¿½È­
+                levelCreator.LoadMap();  // ï¿½ï¿½ï¿½Î¿ï¿½ ï¿½ï¿½ ï¿½Îµï¿½
             }
 
             SceneManager.LoadScene("GameScene");
         }
     }
 
-    // ¸ÞÀÎ È­¸éÀ¸·Î µ¹¾Æ°¡´Â ¹öÆ° Å¬¸¯ ½Ã
+    // ï¿½ï¿½ï¿½ï¿½ È­ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Æ°ï¿½ï¿½ï¿½ ï¿½ï¿½Æ° Å¬ï¿½ï¿½ ï¿½ï¿½
     public void ReturnToMainMenu()
     {
         isStartSetting = true;
 
-        Time.timeScale = 1f; // °ÔÀÓ ¼Óµµ¸¦ ´Ù½Ã Á¤»óÈ­
-        SceneManager.LoadScene("MainScene"); // ¸ÞÀÎ ¸Þ´º·Î ÀÌµ¿
+        Time.timeScale = 1f; // ï¿½ï¿½ï¿½ï¿½ ï¿½Óµï¿½ï¿½ï¿½ ï¿½Ù½ï¿½ ï¿½ï¿½ï¿½ï¿½È­
+        SceneManager.LoadScene("MainScene"); // ï¿½ï¿½ï¿½ï¿½ ï¿½Þ´ï¿½ï¿½ï¿½ ï¿½Ìµï¿½
     }
 }
 

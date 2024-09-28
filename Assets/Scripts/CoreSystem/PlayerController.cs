@@ -4,11 +4,12 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [Header("플레이어")]
+    [Header("Player Movement")]
     public float speed;
+    [SerializeField] private bool isSpeed = false;
+    [SerializeField] private bool isPlayingMusic = false;
 
     private float currentAcceleration = 0;
-    private Rigidbody playerRigidbody;
 
     [SerializeField] private float maxAccSide = 6;
     [SerializeField] private float accelerationRate = 20;
@@ -21,6 +22,7 @@ public class PlayerController : MonoBehaviour
     public float invulnerabilityDuration = 2f; // 무적 지속 시간
 
     private CameraMove cameraMove;
+    private Rigidbody playerRigidbody;
 
     void Start()
     {
@@ -32,6 +34,8 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+        if (!GameStateManager.instance.isGameRunning) return; // 게임이 시작되지 않았다면 아무것도 하지 않음
+
         speed = GameManager.instance.GetMovementSpeed();
         Move();
 
@@ -46,30 +50,63 @@ public class PlayerController : MonoBehaviour
         if (!Input.GetKey(KeyCode.LeftArrow) && !Input.GetKey(KeyCode.RightArrow))
         {
             if (Mathf.Abs(currentAcceleration) < 0.1) currentAcceleration = 0;
-            if (currentAcceleration < 0) currentAcceleration += Time.deltaTime * accelerationRate / 1.25f;
-            else if (currentAcceleration > 0) currentAcceleration -= Time.deltaTime * accelerationRate / 1.25f;
+            
+            if (currentAcceleration < 0)
+            {
+                currentAcceleration += Time.deltaTime * accelerationRate / 1.25f;
+            }
+            else if (currentAcceleration > 0)
+            {
+                currentAcceleration -= Time.deltaTime * accelerationRate / 1.25f;
+            }
             MoveSideScale(false);
         }
 
         if (Input.GetKey(KeyCode.LeftArrow))
         {
-            if (Mathf.Abs(currentAcceleration) < maxAccSide || currentAcceleration > 0) currentAcceleration -= Time.deltaTime * accelerationRate;
+            if (Mathf.Abs(currentAcceleration) < maxAccSide || currentAcceleration > 0)
+            {
+                currentAcceleration -= Time.deltaTime * accelerationRate;
+            }
             MoveSideScale(true);
         }
         if (Input.GetKey(KeyCode.RightArrow))
         {
-            if (Mathf.Abs(currentAcceleration) < maxAccSide || currentAcceleration < 0) currentAcceleration += Time.deltaTime * accelerationRate;
+            if (Mathf.Abs(currentAcceleration) < maxAccSide || currentAcceleration < 0)
+            {
+                currentAcceleration += Time.deltaTime * accelerationRate;
+            }
             MoveSideScale(true);
         }
 
         transform.Translate(currentAcceleration * Time.deltaTime, 0.0f, 0.0f);
-        transform.Translate(0.0f, 0.0f, speed * Time.deltaTime);
+
+        if (!isSpeed)
+        {
+            transform.Translate(0.0f, 0.0f, speed * Time.deltaTime);
+
+            if (!isPlayingMusic) // 음악이 재생 중이 아니면 재생 시작
+            {
+                SoundManager.instance.PlaySound("Game1");
+                isPlayingMusic = true;
+            }
+        }
+        else
+        {
+            isPlayingMusic = false; // 멈출 때 플래그를 초기화
+        }
     }
 
     private void MoveSideScale(bool moveSide)
     {
-        if (moveSide) transform.localScale = Vector3.Lerp(transform.localScale, moveSideScale, Time.deltaTime * maxAccSide);
-        else transform.localScale = Vector3.Lerp(transform.localScale, iniScale, Time.deltaTime * maxAccSide);
+        if (moveSide)
+        {
+            transform.localScale = Vector3.Lerp(transform.localScale, moveSideScale, Time.deltaTime * maxAccSide);
+        }
+        else
+        {
+            transform.localScale = Vector3.Lerp(transform.localScale, iniScale, Time.deltaTime * maxAccSide);
+        }
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -84,6 +121,7 @@ public class PlayerController : MonoBehaviour
     {
         gameObject.SetActive(false);
         cameraMove.shake = true;
+        SoundManager.instance.StopSound("Game1");
     }
 
     public void StartInvulnerability()
@@ -94,11 +132,9 @@ public class PlayerController : MonoBehaviour
     private IEnumerator InvulnerabilityCoroutine()
     {
         isInvulnerable = true; // 무적 상태로 설정
-        // 플레이어의 외형이나 효과 추가: 예를 들어, 색상을 변경하거나 애니메이션 추가
 
         yield return new WaitForSeconds(invulnerabilityDuration); // 지정된 시간 동안 대기
 
         isInvulnerable = false; // 무적 상태 해제
-        // 무적 해제 후 외형 복원
     }
 }
