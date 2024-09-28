@@ -178,7 +178,6 @@ public class UiManager2 : MonoBehaviour
 
     public void RespawnPlayer(GameObject player)
     {
-        //player.SetActive(true);
 
         if (checkpointSet)
         {
@@ -191,7 +190,6 @@ public class UiManager2 : MonoBehaviour
             // 초기 스폰 위치 사용
             player.transform.position = new Vector3(2f, 0.3218206f, 0.6643624f);
         }
-        //000000000
 
         player.GetComponent<PlayerController>().StartInvulnerability(); // 무적 상태 시작
 
@@ -205,19 +203,27 @@ public class UiManager2 : MonoBehaviour
     }
 
     // 처음부터 다시 시작하는 버튼 클릭 시
-    public void RestartGame()
+    public void RestartBeginning()
     {
         checkpointSet = false; // 체크포인트 초기화
         
         if (player != null)
         {
             SceneManager.LoadScene("GameScene");
-            //GameStateManager.instance.ReadyGame();
+        }
+    }
+    public void RestartCheckPoint()
+    {
+
+        if (player != null)
+        {
+            SceneManager.LoadScene("GameScene");
         }
     }
 
     public void SetCheckpoint(Vector3 checkpointPosition)
     {
+        Debug.Log("된다");
         lastCheckpointPosition = checkpointPosition;
         checkpointSet = true;
     }
@@ -260,8 +266,6 @@ public class UiManager2 : MonoBehaviour
             }
 
             SceneManager.LoadScene("GameScene");
-
-            //StartCoroutine(GameStateManager.instance.StartGameWithDelay(3f)); // 클릭 후 게임 시작
         }
     }
 

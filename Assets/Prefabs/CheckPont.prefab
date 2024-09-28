@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2525826795280776044}
   - component: {fileID: 2895746970164790821}
   - component: {fileID: 4745840467842357057}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: CheckPont
   m_TagString: Ground
   m_Icon: {fileID: 0}
@@ -104,8 +104,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1, y: 50, z: 1}
+  m_Center: {x: 0, y: 25, z: 0}
 --- !u!114 &4745840467842357057
 MonoBehaviour:
   m_ObjectHideFlags: 0
