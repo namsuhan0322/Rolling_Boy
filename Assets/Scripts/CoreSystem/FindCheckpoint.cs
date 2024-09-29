@@ -10,7 +10,7 @@ public class FindCheckpoint : MonoBehaviour
     public bool isFinded = false;
 
     // Update is called once per frame
-    void Update()
+    /*void Update()
     {
         //Vector3 center = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z + 15);
         Vector3 halfExtents = new Vector3(5, 20, 30); // 테스트여서 높이가 20
@@ -36,5 +36,5 @@ public class FindCheckpoint : MonoBehaviour
             }
             isReset = false;
         }
-    }
+    }*/
 }

@@ -33,23 +33,26 @@ public class UiManager2 : MonoBehaviour
 
     private float point;
     private float bestScore;
-    private int diaMond_N = 0;  //���̾Ƹ�� ������ ���� ����
+    private int diaMond_N = 0;  
     private int allDiaMond_N = 10;
 
     public static bool isStartSetting = false;
 
-    //�ű� �ڵ�--------------------------------------------
+    //--------------------------------------------
     private static Vector3 lastCheckpointPosition;
     private static bool checkpointSet = false;
     //------------------------------------------------
     public static UiManager2 Instance;
+    private bool isStarting = false;
+    private bool isStarting_02 = false;
+    private float allBlock_2;
+    private float variable; 
 
     private void Awake()
     {
         if (Instance == null)
         {
             Instance = this;
-            //DontDestroyOnLoad(gameObject);
         }
         else
         {
@@ -62,65 +65,74 @@ public class UiManager2 : MonoBehaviour
 
     private void Start()
     {
-        RespawnPlayer(player); // �÷��̾� ������
+        RespawnPlayer(player);
 
-        //UI�ʱ�ȭ
+        ClearActive();
         gameUI2[0].SetActive(true);
-        for (int i = 1; i < gameUI2.Length; i++)
+
+        bestScore = PlayerPrefs.GetFloat("BestScore");
+        isStarting = true;
+        isStarting_02 = true;
+    }
+    void ClearActive()
+    {
+        for (int i = 0; i < gameUI2.Length; i++)
         {
             gameUI2[i].SetActive(false);
         }
-        //�ְ����� ����
-        bestScore = PlayerPrefs.GetFloat("BestScore");
-
     }
 
     void Update()
     {
-        StartGame(); 
+        StartGame();
         CheckScore();
         CheckClearGame();
 
         if (gameUI2[3].activeSelf == true)
         {
             gameUI2[2].SetActive(false);
-            Time.timeScale = 0f;          //PausePlay()�� �־��� ��, �ð������� UIȭ���� �ȶߴ� �����߻��ؼ� ��.
+            Time.timeScale = 0f;          
         }
+
     }
 
-    public void CheckClearGame() //����, ���п��θ� üũ�ϴ� �޼���
+    public void CheckClearGame()
     {
         if (player.activeSelf == false)
         {
             GameOver();
         }
 
-        if (player.transform.position.z >= allBlock)  //���� Ŭ��������
+        if (player.transform.position.z >= allBlock_2)
         {
             GameOver();
         }
     }
 
-    public void CheckScore()    //�ǽð����� ���� üũ�ϴ� �޼���
+    public void CheckScore()
     {
-        allBlock = levelCreator.allBlock ;
-        allBlock = Mathf.CeilToInt(allBlock * GameManager.instance.beatInterval);
+        if (isStarting)
+        {
+            variable = 60 / GameManager.instance.bpm;
+            allBlock = levelCreator.allBlock;
+            allBlock_2 = allBlock * variable;
+            isStarting = false;
+        }
         currentBlock = player.transform.position.z + 1;
-        point = currentBlock / allBlock;
+        point = currentBlock / allBlock_2;
 
         float processPoint = Mathf.Ceil(Mathf.Min(point * 100, 100f));
-        realTimeProgress.text = string.Format("{0}%", processPoint.ToString());     //�ǽð� �������൵ǥ��
+        realTimeProgress.text = string.Format("{0}%", processPoint.ToString());
     }
 
-    //��ư�޼��� , ���ӿϷ� �޼���
-
-    public void StartGame() //���ӽ��� UI����
+    public void StartGame()
     {
-        if (GameStateManager.instance.isGameRunning)
+        if (GameStateManager.instance.isGameRunning && isStarting_02)
         {
             gameUI2[0].SetActive(false);
             gameUI2[1].SetActive(true);
             gameUI2[2].SetActive(true);
+            isStarting_02 = false;
         }
     }
 
@@ -129,19 +141,19 @@ public class UiManager2 : MonoBehaviour
 
     }
 
-    public void PausePlay() //���� �Ͻ�����
+    public void PausePlay() 
     {
         gameUI2[3].SetActive(true);
     }
 
-    public void ContinueGame() //���� �������
+    public void ContinueGame()
     {
         gameUI2[3].SetActive(false);
         gameUI2[2].SetActive(true);
         Time.timeScale = 1f;
     }
 
-    public void GameOver()  //���ӿϷ�޼���        BestScore, BestScore_st �������� ����
+    public void GameOver()
     {
         if (point >= 1)
         {
@@ -155,7 +167,7 @@ public class UiManager2 : MonoBehaviour
             PlayerPrefs.Save();
         }
 
-        if (player.activeSelf == false)  //���� Ŭ����� �÷��̾��� �߷°��� 0���� �ؼ� �Ǵ�.
+        if (player.activeSelf == false)
         {
             gameUI2[2].SetActive(false);
             gameUI2[4].SetActive(true);
@@ -174,7 +186,7 @@ public class UiManager2 : MonoBehaviour
             diaMond_N_Text_2.text = string.Format("{0}/{1}", diaMond_N, allDiaMond_N);
         }
     }
-//------------------------------------------------------------------------------------------------------------�Űܿ� �ڵ�
+//------------------------------------------------------------------------------------------------------------
 
     public void RespawnPlayer(GameObject player)
     {
@@ -182,30 +194,27 @@ public class UiManager2 : MonoBehaviour
         if (checkpointSet)
         {
             Vector3 respawnPosition = lastCheckpointPosition;
-            respawnPosition.y = Mathf.Max(respawnPosition.y + 1f, 0f); // Y ��ǥ�� �ּ� 0���� ����
+            respawnPosition.y = Mathf.Max(respawnPosition.y + 1f, 0f);
             player.transform.position = respawnPosition;
         }
         else 
         {
-            // �ʱ� ���� ��ġ ���
             player.transform.position = new Vector3(2f, 0.3218206f, 0.6643624f);
         }
 
-        player.GetComponent<PlayerController>().StartInvulnerability(); // ���� ���� ����
+        player.GetComponent<PlayerController>().StartInvulnerability();
 
-        // LevelCreator �ʱ�ȭ �� �� �ε�
         LevelCreator levelCreator = FindObjectOfType<LevelCreator>();
         if (levelCreator != null)
         {
-            levelCreator.ResetMap(); // �� �ʱ�ȭ
-            levelCreator.LoadMap();  // �� �ٽ� �ε�
+            levelCreator.ResetMap();
+            levelCreator.LoadMap();
         }
     }
 
-    // ó������ �ٽ� �����ϴ� ��ư Ŭ�� ��
     public void RestartBeginning()
     {
-        checkpointSet = false; // üũ����Ʈ �ʱ�ȭ
+        checkpointSet = false;
         
         if (player != null)
         {
@@ -216,26 +225,26 @@ public class UiManager2 : MonoBehaviour
     public void RestartCheckPoint()
     {
 
-        if (player != null)
+        if (checkpointSet)
         {
             SceneManager.LoadScene("GameScene");
+        }
+        else
+        {
+            Debug.Log("체크포인트가 할당되지 않았습니다");
         }
     }
 
     public void SetCheckpoint(Vector3 checkpointPosition)
     {
-        Debug.Log("�ȴ�");
         lastCheckpointPosition = checkpointPosition;
         checkpointSet = true;
     }
     
     public void OnFinishReached()
     {
-        // ������ �������� �˸��� ��ư�� Ȱ��ȭ
         if (GameManager.instance.currentLevel == 4)
         {
-            //���� ����Ŭ����UI���� �������� ���� ��ư ��Ȱ��ȭ
-            //�ٽ��ϱ� ��ư ����� �̵� �߰�����
 
             Time.timeScale = 0f;
         }
@@ -243,39 +252,36 @@ public class UiManager2 : MonoBehaviour
 
     public void ProceedToNextStage()
     {
-        Debug.Log("�ȴ�");
         int currentLevel = GameManager.instance.currentLevel;
-        // ������ ���������� Level3�� �� (�� �κ��� ����)
         if (currentLevel == 4)
         {
             OnFinishReached();
         }
         else
         {
-            currentLevel++; // �������� ����
+            currentLevel++;
             Debug.Log("Proceeding to next stage. Current level: " + currentLevel);
 
             GameManager.instance.currentLevel = currentLevel;
-            checkpointSet = false; // üũ����Ʈ �ʱ�ȭ
+            checkpointSet = false;
 
             LevelCreator levelCreator = FindObjectOfType<LevelCreator>();
             if (levelCreator != null)
             {
-                levelCreator.ResetMap(); // ���� �� �ʱ�ȭ
-                levelCreator.LoadMap();  // ���ο� �� �ε�
+                levelCreator.ResetMap();
+                levelCreator.LoadMap();
             }
 
             SceneManager.LoadScene("GameScene");
         }
     }
 
-    // ���� ȭ������ ���ư��� ��ư Ŭ�� ��
     public void ReturnToMainMenu()
     {
         isStartSetting = true;
 
-        Time.timeScale = 1f; // ���� �ӵ��� �ٽ� ����ȭ
-        SceneManager.LoadScene("MainScene"); // ���� �޴��� �̵�
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("MainScene");
     }
 }
 
