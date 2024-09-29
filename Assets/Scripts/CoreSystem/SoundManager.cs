@@ -25,9 +25,11 @@ public class Sound
 public class SoundManager : MonoBehaviour
 {
     public static SoundManager instance;        // 싱글톤 인스턴스 화 시킨다.
-
+    
     public List<Sound> sounds = new List<Sound>();      // 사운드 리스트(배열보다 우연한 자료구조)
     public AudioMixer audioMixer;                       // 오디오 믹서 참조
+    
+    private float savedMusicTime = 0f;
 
     void Awake()
     {
@@ -73,6 +75,40 @@ public class SoundManager : MonoBehaviour
         if (stopSoundToPlay != null)
         {
             stopSoundToPlay.source.Stop();
+        }
+    }
+    
+    public void PauseSound(string name)
+    {
+        Sound stopSoundToPlay = sounds.Find(sound => sound.name == name);
+
+        if (stopSoundToPlay != null)
+        {
+            stopSoundToPlay.source.Pause();
+        }
+    }
+    
+    // 노래의 현재 재생 위치를 저장하는 메서드
+    public void SaveMusicTime(string name)
+    {
+        Sound sound = sounds.Find(s => s.name == name);
+        if (sound != null)
+        {
+            savedMusicTime = sound.source.time;
+            Debug.Log("Saved Music Time: " + savedMusicTime);
+        }
+    }
+
+    // 저장된 시간에서 노래를 다시 재생하는 메서드
+    public void ResumeMusicFromSavedTime(string name)
+    {
+        Sound sound = sounds.Find(s => s.name == name);
+        if (sound != null)
+        {
+            // 저장된 시간에서부터 음악 재생
+            sound.source.time = savedMusicTime;
+            sound.source.Play();
+            Debug.Log("Resuming Music from Time: " + savedMusicTime);
         }
     }
 }

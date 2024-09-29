@@ -19,7 +19,7 @@ public class PlayerController : MonoBehaviour
 
     public bool airborne = false;
     public bool isInvulnerable = false; // 무적 상태를 나타내는 변수
-    public float invulnerabilityDuration = 2f; // 무적 지속 시간
+    public float invulnerabilityDuration = 0.5f; // 무적 지속 시간
 
     private CameraMove cameraMove;
     private Rigidbody playerRigidbody;
@@ -84,10 +84,19 @@ public class PlayerController : MonoBehaviour
         if (!isSpeed)
         {
             transform.Translate(0.0f, 0.0f, speed * Time.deltaTime);
+    
+            UiManager2 uiManager2 = FindObjectOfType<UiManager2>();
 
-            if (!isPlayingMusic) // 음악이 재생 중이 아니면 재생 시작
+            // 음악이 재생 중이지 않고 체크포인트가 설정되지 않았을 때만 재생
+            if (!isPlayingMusic && !uiManager2.IsCheckpointSet())
             {
                 SoundManager.instance.PlaySound("Game1");
+                isPlayingMusic = true;
+            }
+            // 체크포인트가 설정된 경우, 저장된 시간부터 음악 재개
+            else if (!isPlayingMusic && uiManager2.IsCheckpointSet())
+            {
+                SoundManager.instance.ResumeMusicFromSavedTime("Game1");
                 isPlayingMusic = true;
             }
         }

@@ -95,6 +95,11 @@ public class UiManager2 : MonoBehaviour
         }
 
     }
+    
+    public bool IsCheckpointSet()
+    {
+        return checkpointSet;
+    }
 
     public void CheckClearGame()
     {
@@ -144,6 +149,7 @@ public class UiManager2 : MonoBehaviour
     public void PausePlay() 
     {
         gameUI2[3].SetActive(true);
+        SoundManager.instance.PauseSound("Game1");
     }
 
     public void ContinueGame()
@@ -151,6 +157,8 @@ public class UiManager2 : MonoBehaviour
         gameUI2[3].SetActive(false);
         gameUI2[2].SetActive(true);
         Time.timeScale = 1f;
+        
+        SoundManager.instance.PlaySound("Game1");
     }
 
     public void GameOver()
@@ -187,10 +195,8 @@ public class UiManager2 : MonoBehaviour
         }
     }
 //------------------------------------------------------------------------------------------------------------
-
     public void RespawnPlayer(GameObject player)
     {
-
         if (checkpointSet)
         {
             Vector3 respawnPosition = lastCheckpointPosition;
@@ -211,7 +217,7 @@ public class UiManager2 : MonoBehaviour
             levelCreator.LoadMap();
         }
     }
-
+    
     public void RestartBeginning()
     {
         checkpointSet = false;
@@ -224,7 +230,6 @@ public class UiManager2 : MonoBehaviour
     
     public void RestartCheckPoint()
     {
-
         if (checkpointSet)
         {
             SceneManager.LoadScene("GameScene");
@@ -234,7 +239,6 @@ public class UiManager2 : MonoBehaviour
             Debug.Log("체크포인트가 할당되지 않았습니다");
         }
     }
-
     public void SetCheckpoint(Vector3 checkpointPosition)
     {
         lastCheckpointPosition = checkpointPosition;
