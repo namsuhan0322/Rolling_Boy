@@ -9,11 +9,12 @@ public class GameManager : MonoBehaviour
     public int currentLevel = 1;
     public float bpm = 120f; // BPM 기본값
     public float beatInterval; //UiManager2로가 가져가기 위해서
-//-----------------------------------------------------------------------------
+    public bool isUpdate = false; //최고기록 갱신을 위한 불값
+
     
     public GameObject player;
 
-    public float GetMovementSpeed(float distancePerBeat = 5f) //5였음
+    public float GetMovementSpeed(float distancePerBeat = 5f) 
     {
         beatInterval = 60f / bpm; // 1비트당 시간 (초)
         float speed = distancePerBeat / beatInterval; // 이동 속도 계산

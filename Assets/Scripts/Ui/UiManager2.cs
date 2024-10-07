@@ -21,10 +21,7 @@ public class UiManager2 : MonoBehaviour
     private TextMeshProUGUI progress_Text_2;
     [SerializeField]
     private TextMeshProUGUI realTimeProgress;
-    [SerializeField]
-    private TextMeshProUGUI diaMond_N_Text;
-    [SerializeField]
-    private TextMeshProUGUI diaMond_N_Text_2;
+
 
 
     LevelCreator levelCreator;
@@ -32,9 +29,7 @@ public class UiManager2 : MonoBehaviour
     private float currentBlock = 0f;
 
     private float point;
-    private float bestScore;
-    private int diaMond_N = 0;  
-    private int allDiaMond_N = 10;
+    private float[] bestScore = new float[4];
 
     public static bool isStartSetting = false;
 
@@ -46,7 +41,9 @@ public class UiManager2 : MonoBehaviour
     private bool isStarting = false;
     private bool isStarting_02 = false;
     private float allBlock_2;
-    private float variable; 
+    private float variable;
+
+    private Rigidbody rb;
 
     private void Awake()
     {
@@ -61,6 +58,7 @@ public class UiManager2 : MonoBehaviour
 
         levelCreator = FindObjectOfType<LevelCreator>();
         player = GameObject.Find("Player");
+        rb = player.GetComponent<Rigidbody>();
     }
 
     private void Start()
@@ -69,10 +67,27 @@ public class UiManager2 : MonoBehaviour
 
         ClearActive();
         gameUI2[0].SetActive(true);
-
-        bestScore = PlayerPrefs.GetFloat("BestScore");
         isStarting = true;
         isStarting_02 = true;
+
+        GameManager.instance.isUpdate = true;  //UIManager 의 업데이트활성화
+
+        if (GameManager.instance.currentLevel == 1)
+        {
+            bestScore[0] = PlayerPrefs.GetFloat("BestScore1");
+        }
+        if (GameManager.instance.currentLevel == 2)
+        {
+            bestScore[1] = PlayerPrefs.GetFloat("BestScore2");
+        }
+        if (GameManager.instance.currentLevel == 3)
+        {
+            bestScore[2] = PlayerPrefs.GetFloat("BestScore3");
+        }
+        if (GameManager.instance.currentLevel == 4)
+        {
+            bestScore[3] = PlayerPrefs.GetFloat("BestScore4");
+        }
     }
     void ClearActive()
     {
@@ -94,6 +109,44 @@ public class UiManager2 : MonoBehaviour
             Time.timeScale = 0f;          
         }
 
+        Debug.Log(PlayerPrefs.GetString("BestScore_st1"));
+
+        if (GameManager.instance.currentLevel == 1)
+        {
+            if (bestScore[0] < point)
+            {
+                PlayerPrefs.SetFloat("BestScore1", point);
+                PlayerPrefs.SetString("BestScore_st1", string.Format("{0}%", Mathf.Ceil(point * 100).ToString()));
+                PlayerPrefs.Save();
+            }
+        }
+        if (GameManager.instance.currentLevel == 2)
+        {
+            if (bestScore[1] < point)
+            {
+                PlayerPrefs.SetFloat("BestScore2", point);
+                PlayerPrefs.SetString("BestScore_st2", string.Format("{0}%", Mathf.Ceil(point * 100).ToString()));
+                PlayerPrefs.Save();
+            }
+        }
+        if (GameManager.instance.currentLevel == 3)
+        {
+            if (bestScore[2] < point)
+            {
+                PlayerPrefs.SetFloat("BestScore3", point);
+                PlayerPrefs.SetString("BestScore_st3", string.Format("{0}%", Mathf.Ceil(point * 100).ToString()));
+                PlayerPrefs.Save();
+            }
+        }
+        if (GameManager.instance.currentLevel == 4)
+        {
+            if (bestScore[3] < point)
+            {
+                PlayerPrefs.SetFloat("BestScore4", point);
+                PlayerPrefs.SetString("BestScore_st4", string.Format("{0}%", Mathf.Ceil(point * 100).ToString()));
+                PlayerPrefs.Save();
+            }
+        }
     }
     
     public bool IsCheckpointSet()
@@ -108,12 +161,13 @@ public class UiManager2 : MonoBehaviour
             GameOver();
         }
 
-        if (player.transform.position.z >= allBlock_2)
+        if (player.transform.position.z >= allBlock_2 - 2)
         {
             GameOver();
+            rb.constraints = RigidbodyConstraints.FreezePositionY;
+
         }
     }
-
     public void CheckScore()
     {
         if (isStarting)
@@ -168,13 +222,6 @@ public class UiManager2 : MonoBehaviour
             point = 1f;
         }
 
-        if (bestScore < point)
-        {
-            PlayerPrefs.SetFloat("BestScore", point);
-            PlayerPrefs.SetString("BestScore_st", string.Format("{0}%", Mathf.Ceil(point * 100).ToString()));
-            PlayerPrefs.Save();
-        }
-
         if (player.activeSelf == false)
         {
             gameUI2[2].SetActive(false);
@@ -182,16 +229,17 @@ public class UiManager2 : MonoBehaviour
 
             progressSlider.value = point;
             progress_Text.text = string.Format("{0}%", Mathf.Ceil(point * 100).ToString());
-            diaMond_N_Text.text = string.Format("{0}/{1}",diaMond_N ,allDiaMond_N);
         }
         else
         {
-            gameUI2[2].SetActive(false);
-            gameUI2[5].SetActive(true);
+            if (GameManager.instance.currentLevel != 4)
+            {
+                gameUI2[2].SetActive(false);
+                gameUI2[5].SetActive(true);
+            }
 
             progressSlider_2.value = point;
             progress_Text_2.text = string.Format("{0}%", Mathf.Ceil(point * 100).ToString());
-            diaMond_N_Text_2.text = string.Format("{0}/{1}", diaMond_N, allDiaMond_N);
         }
     }
 //------------------------------------------------------------------------------------------------------------
@@ -249,8 +297,9 @@ public class UiManager2 : MonoBehaviour
     {
         if (GameManager.instance.currentLevel == 4)
         {
-
-            Time.timeScale = 0f;
+            gameUI2[2].SetActive(false);
+            gameUI2[6].SetActive(true);
+            //Time.timeScale = 0f;
         }
     }
 
