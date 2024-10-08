@@ -109,8 +109,6 @@ public class UiManager2 : MonoBehaviour
             Time.timeScale = 0f;          
         }
 
-        Debug.Log(PlayerPrefs.GetString("BestScore_st1"));
-
         if (GameManager.instance.currentLevel == 1)
         {
             if (bestScore[0] < point)

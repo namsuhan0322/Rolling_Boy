@@ -25,7 +25,7 @@ public class UiManager : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI progress_Text4;
 
-
+    bool isOpen = false;
     private void Awake()
     {
 
@@ -38,13 +38,10 @@ public class UiManager : MonoBehaviour
     }
     private void Start()
     {
-        if (!isStartSetting)
-        {
-            ClearUI();
-            gameUI[0].SetActive(true);
-            gameUI[1].SetActive(true);
-            isStartSetting = false;
-        }
+        gameUI[0].SetActive(true);
+        gameUI[1].SetActive(false);
+        gameUI[2].SetActive(false);
+
         progress_Text1.SetText(PlayerPrefs.GetString("BestScore_st1", "0%"));
         progress_Text2.SetText(PlayerPrefs.GetString("BestScore_st2", "0%"));
         progress_Text3.SetText(PlayerPrefs.GetString("BestScore_st3", "0%"));
@@ -79,44 +76,33 @@ public class UiManager : MonoBehaviour
     }
 
     //--------------------------------------------------------------------------------------------------------------------------------
-    private void ClearUI()  //UI초기화
-    {
-        for (int i = 1; i < gameUI.Count; i++)
-        {
-            gameUI[i].SetActive(false);
-        }
-    }
     // 기본화면에서 활성화
     public void HomeUI()
     {
-        ClearUI();
+        gameUI[1].SetActive(false);
+        gameUI[2].SetActive(false);
         gameUI[0].SetActive(true);
-        gameUI[1].SetActive(true);
-    }
-    public void LevelUI()
-    {
-        ClearUI();
-        gameUI[0].SetActive(true);
-        gameUI[2].SetActive(true);
     }
     public void SettingUI()
     {
-        ClearUI();
-        gameUI[0].SetActive(true);
-        gameUI[3].SetActive(true);
+        isOpen = !isOpen;
+
+        if (isOpen)
+        {
+            gameUI[1].SetActive(true);
+        }
+        else
+        {
+            gameUI[1].SetActive(false);
+        }
+
     }
     //게임씬 전으로 이동
     public void ReadyUI_1()
     {
-        ClearUI();
         gameUI[0].SetActive(false);
-        gameUI[4].SetActive(true);
-    }
-    public void ReadyUI_2()
-    {
-        ClearUI();
-        gameUI[0].SetActive(false);
-        gameUI[5].SetActive(true);
+        gameUI[1].SetActive(false);
+        gameUI[2].SetActive(true);
     }
 
     //게임씬으로 이동

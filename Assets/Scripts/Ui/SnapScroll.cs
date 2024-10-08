@@ -15,7 +15,12 @@ public class SnapScroll : MonoBehaviour, IEndDragHandler
     [SerializeField] float tweenTime;
     [SerializeField] LeanTweenType tweenType;
 
-    public bool canTouchSnap = false;
+    [SerializeField] Image[] barImage;
+    [SerializeField] Sprite barClosed, barOpen;
+
+    [SerializeField] Image BG_Image;
+    [SerializeField] Sprite[] BG_Sprite = new Sprite[3];
+
     float dragThreshould;
 
     public Button[] uiButton;
@@ -26,12 +31,13 @@ public class SnapScroll : MonoBehaviour, IEndDragHandler
     {
         currentPage = 1;
         targetPos = levelPagesRect.localPosition;
-        dragThreshould = Screen.height/ 20;
+        dragThreshould = Screen.width/ 15;
     }
 
     private void Update()
     {
         ConvertUI();
+        UpdateImage();
     }
     public void Next()
     {
@@ -59,24 +65,50 @@ public class SnapScroll : MonoBehaviour, IEndDragHandler
     {
         levelPagesRect.LeanMoveLocal(targetPos, tweenTime).setEase(tweenType);
         isTurning = true;
+        UpdateImage();
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        if (canTouchSnap)
-        {
-            if (Mathf.Abs(eventData.position.y - eventData.pressPosition.y) > dragThreshould)
-            {
-                if (eventData.position.y < eventData.pressPosition.y) Previous();
-                else Next();
-            }
-            else
-            {
-                MovePage();
-            }
-        }
 
+        if (Mathf.Abs(eventData.position.x - eventData.pressPosition.x) > dragThreshould)
+        {
+            if (eventData.position.x > eventData.pressPosition.x) Previous();
+
+            if (eventData.position.x < eventData.pressPosition.x) Next();
+        }
+        else
+        {
+            MovePage();
+        }
     }
+
+    private void UpdateImage()
+    {
+        foreach (var item in barImage)
+        {
+            item.sprite = barClosed;
+        }
+        barImage[currentPage - 1].sprite = barOpen;
+
+        if (currentPage % 4 == 1)
+        {
+            BG_Image.sprite = BG_Sprite[0];
+        }
+        if (currentPage % 4 == 2)
+        {
+            BG_Image.sprite = BG_Sprite[1];
+        }
+        if (currentPage % 4 == 3)
+        {
+            BG_Image.sprite = BG_Sprite[2];
+        }
+        if (currentPage % 4 == 0)
+        {
+            BG_Image.sprite = BG_Sprite[3];
+        }
+    }
+
     private void ConvertUI()
     {
         for (int i = 0; i < uiButton.Length; i++)
