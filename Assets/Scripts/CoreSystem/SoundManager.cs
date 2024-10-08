@@ -31,6 +31,8 @@ public class SoundManager : MonoBehaviour
     
     private float savedMusicTime = 0f;
 
+    public bool isSoundOff = false;  //게임 설정에서 사운드를 끄는데 사용할 bool값
+
     void Awake()
     {
         if (instance == null)
@@ -53,12 +55,12 @@ public class SoundManager : MonoBehaviour
             sound.source.outputAudioMixerGroup = sound.mixerGroup;      // 오디오 믹서 그룹 설정
         }
     }
-    
+
     public void PlaySound(string name)                                      // 인수 Name 받아서
     {
         Sound soundToPlay = sounds.Find(sound => sound.name == name);       // List 안에 있는 name 이 같은것을 검색 후 soundToPlay에 선언
 
-        if (soundToPlay != null)
+        if (soundToPlay != null && !isSoundOff)  //메인씬에서 사운드설정을 해서 영향을 받을 조건문
         {
             soundToPlay.source.Play();
         }
@@ -103,7 +105,7 @@ public class SoundManager : MonoBehaviour
     public void ResumeMusicFromSavedTime(string name)
     {
         Sound sound = sounds.Find(s => s.name == name);
-        if (sound != null)
+        if (sound != null && !isSoundOff)  //메인씬에서 사운드설정을 해서 영향을 받을 조건문
         {
             // 저장된 시간에서부터 음악 재생
             sound.source.time = savedMusicTime;

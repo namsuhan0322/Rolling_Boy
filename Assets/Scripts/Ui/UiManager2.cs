@@ -31,8 +31,6 @@ public class UiManager2 : MonoBehaviour
     private float point;
     private float[] bestScore = new float[4];
 
-    public static bool isStartSetting = false;
-
     //--------------------------------------------
     private static Vector3 lastCheckpointPosition;
     private static bool checkpointSet = false;
@@ -44,6 +42,14 @@ public class UiManager2 : MonoBehaviour
     private float variable;
 
     private Rigidbody rb;
+
+    private int _currentLevel = 1;
+
+    private bool isGetInfo = true;
+
+    private float timer = 0f;
+    private float setTime = 2f;
+    private bool startTimer = false;
 
     private void Awake()
     {
@@ -59,6 +65,8 @@ public class UiManager2 : MonoBehaviour
         levelCreator = FindObjectOfType<LevelCreator>();
         player = GameObject.Find("Player");
         rb = player.GetComponent<Rigidbody>();
+
+        
     }
 
     private void Start()
@@ -70,24 +78,6 @@ public class UiManager2 : MonoBehaviour
         isStarting = true;
         isStarting_02 = true;
 
-        GameManager.instance.isUpdate = true;  //UIManager 의 업데이트활성화
-
-        if (GameManager.instance.currentLevel == 1)
-        {
-            bestScore[0] = PlayerPrefs.GetFloat("BestScore1");
-        }
-        if (GameManager.instance.currentLevel == 2)
-        {
-            bestScore[1] = PlayerPrefs.GetFloat("BestScore2");
-        }
-        if (GameManager.instance.currentLevel == 3)
-        {
-            bestScore[2] = PlayerPrefs.GetFloat("BestScore3");
-        }
-        if (GameManager.instance.currentLevel == 4)
-        {
-            bestScore[3] = PlayerPrefs.GetFloat("BestScore4");
-        }
     }
     void ClearActive()
     {
@@ -99,6 +89,9 @@ public class UiManager2 : MonoBehaviour
 
     void Update()
     {
+        GetInfo();
+
+        Debug.Log(bestScore[0]);
         StartGame();
         CheckScore();
         CheckClearGame();
@@ -109,41 +102,88 @@ public class UiManager2 : MonoBehaviour
             Time.timeScale = 0f;          
         }
 
-        if (GameManager.instance.currentLevel == 1)
+        if (startTimer)
         {
-            if (bestScore[0] < point)
-            {
-                PlayerPrefs.SetFloat("BestScore1", point);
-                PlayerPrefs.SetString("BestScore_st1", string.Format("{0}%", Mathf.Ceil(point * 100).ToString()));
-                PlayerPrefs.Save();
-            }
+            timer += Time.deltaTime;
+            SetAndSavePoint();
         }
-        if (GameManager.instance.currentLevel == 2)
+        Debug.Log("1번맵 : " + bestScore[0]);
+        Debug.Log("2번맵 : " + bestScore[1]);
+        Debug.Log("3번맵 : " + bestScore[2]);
+        Debug.Log("4번맵 : " + bestScore[3]);
+        Debug.Log("현재맵은 " + _currentLevel);
+    }
+
+    private void GetInfo()
+    {
+        if (GameManager.instance != null && isGetInfo)
         {
-            if (bestScore[1] < point)
+            _currentLevel = GameManager.instance.currentLevel; //한번 가지고 와서 사용한다.
+
+            if (_currentLevel == 1)
             {
-                PlayerPrefs.SetFloat("BestScore2", point);
-                PlayerPrefs.SetString("BestScore_st2", string.Format("{0}%", Mathf.Ceil(point * 100).ToString()));
-                PlayerPrefs.Save();
+                bestScore[0] = PlayerPrefs.GetFloat("BestScore1");
             }
+            if (_currentLevel == 2)
+            {
+                bestScore[1] = PlayerPrefs.GetFloat("BestScore2");
+            }
+            if (_currentLevel == 3)
+            {
+                bestScore[2] = PlayerPrefs.GetFloat("BestScore3");
+            }
+            if (_currentLevel == 4)
+            {
+                bestScore[3] = PlayerPrefs.GetFloat("BestScore4");
+            }
+            isGetInfo = false;
         }
-        if (GameManager.instance.currentLevel == 3)
+    }
+
+    private void SetAndSavePoint()
+    {
+
+        if (timer >= setTime)
         {
-            if (bestScore[2] < point)
+            if (_currentLevel == 1)
             {
-                PlayerPrefs.SetFloat("BestScore3", point);
-                PlayerPrefs.SetString("BestScore_st3", string.Format("{0}%", Mathf.Ceil(point * 100).ToString()));
-                PlayerPrefs.Save();
+                if (bestScore[0] < point)
+                {
+                    Debug.Log("된다4");
+                    PlayerPrefs.SetFloat("BestScore1", point);
+                    PlayerPrefs.SetString("BestScore_st1", string.Format("{0}%", Mathf.Ceil(point * 100).ToString()));
+                    PlayerPrefs.Save();
+                }
             }
-        }
-        if (GameManager.instance.currentLevel == 4)
-        {
-            if (bestScore[3] < point)
+            if (_currentLevel == 2)
             {
-                PlayerPrefs.SetFloat("BestScore4", point);
-                PlayerPrefs.SetString("BestScore_st4", string.Format("{0}%", Mathf.Ceil(point * 100).ToString()));
-                PlayerPrefs.Save();
+                if (bestScore[1] < point)
+                {
+                    PlayerPrefs.SetFloat("BestScore2", point);
+                    PlayerPrefs.SetString("BestScore_st2", string.Format("{0}%", Mathf.Ceil(point * 100).ToString()));
+                    PlayerPrefs.Save();
+                }
             }
+            if (_currentLevel == 3)
+            {
+                if (bestScore[2] < point)
+                {
+                    PlayerPrefs.SetFloat("BestScore3", point);
+                    PlayerPrefs.SetString("BestScore_st3", string.Format("{0}%", Mathf.Ceil(point * 100).ToString()));
+                    PlayerPrefs.Save();
+                }
+            }
+            if (_currentLevel == 4)
+            {
+                if (bestScore[3] < point)
+                {
+                    PlayerPrefs.SetFloat("BestScore4", point);
+                    PlayerPrefs.SetString("BestScore_st4", string.Format("{0}%", Mathf.Ceil(point * 100).ToString()));
+                    PlayerPrefs.Save();
+                }
+            }
+            startTimer = false;
+            timer = 0;
         }
     }
     
@@ -193,11 +233,6 @@ public class UiManager2 : MonoBehaviour
         }
     }
 
-    public void UseSheild()
-    {
-
-    }
-
     public void PausePlay() 
     {
         gameUI2[3].SetActive(true);
@@ -215,11 +250,7 @@ public class UiManager2 : MonoBehaviour
 
     public void GameOver()
     {
-        if (point >= 1)
-        {
-            point = 1f;
-        }
-
+        startTimer = true;
         if (player.activeSelf == false)
         {
             gameUI2[2].SetActive(false);
@@ -230,7 +261,7 @@ public class UiManager2 : MonoBehaviour
         }
         else
         {
-            if (GameManager.instance.currentLevel != 4)
+            if (_currentLevel != 4)
             {
                 gameUI2[2].SetActive(false);
                 gameUI2[5].SetActive(true);
@@ -303,17 +334,17 @@ public class UiManager2 : MonoBehaviour
 
     public void ProceedToNextStage()
     {
-        int currentLevel = GameManager.instance.currentLevel;
-        if (currentLevel == 4)
+        int currentLevels = GameManager.instance.currentLevel;
+        if (currentLevels == 4)
         {
             OnFinishReached();
         }
         else
         {
-            currentLevel++;
-            Debug.Log("Proceeding to next stage. Current level: " + currentLevel);
+            currentLevels++;
+            Debug.Log("Proceeding to next stage. Current level: " + currentLevels);
 
-            GameManager.instance.currentLevel = currentLevel;
+            GameManager.instance.currentLevel = currentLevels;
             checkpointSet = false;
 
             LevelCreator levelCreator = FindObjectOfType<LevelCreator>();
@@ -329,7 +360,6 @@ public class UiManager2 : MonoBehaviour
 
     public void ReturnToMainMenu()
     {
-        isStartSetting = true;
 
         Time.timeScale = 1f;
         SceneManager.LoadScene("MainScene");

@@ -11,10 +11,9 @@ public class UiManager : MonoBehaviour
     List<GameObject> gameUI = new List<GameObject>();
 
     static List<bool> setActive = new List<bool>();
-    private bool isStartSetting = false;
 
     [SerializeField]
-    private GameObject[] levelUI = new GameObject[4];
+    private TextMeshProUGUI[] settingUI = new TextMeshProUGUI[2];
 
     [SerializeField]
     private TextMeshProUGUI progress_Text1;
@@ -26,55 +25,52 @@ public class UiManager : MonoBehaviour
     private TextMeshProUGUI progress_Text4;
 
     bool isOpen = false;
+    bool isMusic = true;
+    bool isInGameSound = true;
+
     private void Awake()
-    {
-
-        isStartSetting = UiManager2.isStartSetting;
-
-        for(int i = 0; i < setActive.Count; i++)
-        {
-            gameUI[i].SetActive(setActive[i]);
-        }
-    }
-    private void Start()
     {
         gameUI[0].SetActive(true);
         gameUI[1].SetActive(false);
         gameUI[2].SetActive(false);
 
+        if (setActive.Count > 0)
+        {
+            for (int i = 0; i < gameUI.Count; i++)
+            {
+                gameUI[i].SetActive(setActive[i]);
+            }
+        }
+    }
+    private void Start()
+    {
+        
         progress_Text1.SetText(PlayerPrefs.GetString("BestScore_st1", "0%"));
         progress_Text2.SetText(PlayerPrefs.GetString("BestScore_st2", "0%"));
         progress_Text3.SetText(PlayerPrefs.GetString("BestScore_st3", "0%"));
         progress_Text4.SetText(PlayerPrefs.GetString("BestScore_st4", "0%"));
-
-        //SetInfoToUI();
+        
     }
-    void Update()
+
+    public void SelectMap_1()
     {
-
+        GameManager.instance.currentLevel = 1;
     }
 
-    private void SetInfoToUI()
+    public void SelectMap_2()
     {
-        if (PlayerPrefs.HasKey("BestScore_str1"))
-        {
-            progress_Text1.SetText(PlayerPrefs.GetString("BestScore_st1"));
-        }
-        if (PlayerPrefs.HasKey("BestScore_str2"))
-        {
-            progress_Text2.SetText(PlayerPrefs.GetString("BestScore_st2"));
-        }
-        if (PlayerPrefs.HasKey("BestScore_str3"))
-        {
-            progress_Text3.SetText(PlayerPrefs.GetString("BestScore_st3"));
-        }
-        if (PlayerPrefs.HasKey("BestScore_str4"))
-        {
-            progress_Text4.SetText(PlayerPrefs.GetString("BestScore_st4"));
-        }
-
+        GameManager.instance.currentLevel = 2;
     }
 
+    public void SelectMap_3()
+    {
+        GameManager.instance.currentLevel = 3;
+    }
+
+    public void SelectMap_4()
+    {
+        GameManager.instance.currentLevel = 4;
+    }
     //--------------------------------------------------------------------------------------------------------------------------------
     // 기본화면에서 활성화
     public void HomeUI()
@@ -97,6 +93,34 @@ public class UiManager : MonoBehaviour
         }
 
     }
+    public void MusicSetting()
+    {
+        isMusic = !isMusic;
+        if (isMusic)
+        {
+            settingUI[0].SetText("음악소리 : 켜기");
+        }
+        else
+        {
+            settingUI[0].SetText("음악소리 : 끄기");
+        }
+    }
+
+    public void InGameSoundSetting()
+    {
+        isInGameSound = !isInGameSound;
+
+        if (isInGameSound)
+        {
+            settingUI[1].SetText("인게임사운드 : 켜기");
+            SoundManager.instance.isSoundOff = false;
+        }
+        else
+        {
+            settingUI[1].SetText("인게임사운드 : 끄기");
+            SoundManager.instance.isSoundOff = true;
+        }
+    }
     //게임씬 전으로 이동
     public void ReadyUI_1()
     {
@@ -108,6 +132,7 @@ public class UiManager : MonoBehaviour
     //게임씬으로 이동
     public void PlayGame()
     {
+        setActive.Clear();
         for (int i = 0; i < gameUI.Count; i++)
         {
             setActive.Add(gameUI[i].activeSelf);

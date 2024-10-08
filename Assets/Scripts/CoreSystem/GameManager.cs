@@ -9,8 +9,6 @@ public class GameManager : MonoBehaviour
     public int currentLevel = 1;
     public float bpm = 120f; // BPM 기본값
     public float beatInterval; //UiManager2로가 가져가기 위해서
-    public bool isUpdate = false; //최고기록 갱신을 위한 불값
-
     
     public GameObject player;
 
@@ -36,9 +34,12 @@ public class GameManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) && !GameStateManager.instance.isGameRunning)
+        if (GameStateManager.instance != null)
         {
-            StartCoroutine(GameStateManager.instance.StartGameWithDelay(1f));
+            if (Input.GetMouseButtonDown(0) && !GameStateManager.instance.isGameRunning)
+            {
+                StartCoroutine(GameStateManager.instance.StartGameWithDelay(1f));
+            }
         }
     }
 }
