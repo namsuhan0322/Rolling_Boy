@@ -44,12 +44,54 @@ public class UiManager : MonoBehaviour
     }
     private void Start()
     {
-        
+        InitializeGame();
+        SetPoint();
+
+
+    }
+
+    private void Update()
+    {
+        Intialize();
+    }
+
+    private void SetPoint()
+    {
         progress_Text1.SetText(PlayerPrefs.GetString("BestScore_st1", "0%"));
         progress_Text2.SetText(PlayerPrefs.GetString("BestScore_st2", "0%"));
         progress_Text3.SetText(PlayerPrefs.GetString("BestScore_st3", "0%"));
         progress_Text4.SetText(PlayerPrefs.GetString("BestScore_st4", "0%"));
-        
+    }
+
+    private void InitializeGame()
+    {
+
+        if (!PlayerPrefs.HasKey("FirstPlay"))
+        {
+            PlayerPrefs.SetFloat("BestScore1", 0);
+            PlayerPrefs.SetFloat("BestScore2", 0);
+            PlayerPrefs.SetFloat("BestScore3", 0);
+            PlayerPrefs.SetFloat("BestScore4", 0);
+
+            PlayerPrefs.SetString("BestScore_st1", "0%");
+            PlayerPrefs.SetString("BestScore_st2", "0%");
+            PlayerPrefs.SetString("BestScore_st3", "0%");
+            PlayerPrefs.SetString("BestScore_st4", "0%");
+
+            PlayerPrefs.Save();
+        }
+    }
+
+    private void Intialize()
+    {
+        if (Input.GetKeyDown(KeyCode.Alpha0))
+        {
+            PlayerPrefs.DeleteKey("FirstPlay");
+            PlayerPrefs.Save();
+
+            InitializeGame();
+            SetPoint();
+        }
     }
 
     public void SelectMap_1()
@@ -138,7 +180,7 @@ public class UiManager : MonoBehaviour
             setActive.Add(gameUI[i].activeSelf);
             Debug.Log(setActive[i]);
         }
-
+        GameManager.instance.isCheckPoint = false;
         LoadingSceneController.LoadScene("GameScene");
     }
 }

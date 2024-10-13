@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using TMPro;
+using Unity.VisualScripting;
 
 public class UiManager2 : MonoBehaviour
 {
@@ -51,6 +52,8 @@ public class UiManager2 : MonoBehaviour
     private float setTime = 2f;
     private bool startTimer = false;
 
+    private float processPoint;
+
     private void Awake()
     {
         if (Instance == null)
@@ -66,11 +69,11 @@ public class UiManager2 : MonoBehaviour
         player = GameObject.Find("Player");
         rb = player.GetComponent<Rigidbody>();
 
-        
     }
 
     private void Start()
     {
+        ResetCheckPoint();
         RespawnPlayer(player);
 
         ClearActive();
@@ -90,8 +93,6 @@ public class UiManager2 : MonoBehaviour
     void Update()
     {
         GetInfo();
-
-        Debug.Log(bestScore[0]);
         StartGame();
         CheckScore();
         CheckClearGame();
@@ -114,6 +115,15 @@ public class UiManager2 : MonoBehaviour
         Debug.Log("현재맵은 " + _currentLevel);
     }
 
+    private void ResetCheckPoint()
+    {
+        if (GameManager.instance.isCheckPoint == false)
+        {
+            checkpointSet = GameManager.instance.isCheckPoint;
+            GameManager.instance.isCheckPoint = true;
+        }
+    }
+
     private void GetInfo()
     {
         if (GameManager.instance != null && isGetInfo)
@@ -122,19 +132,19 @@ public class UiManager2 : MonoBehaviour
 
             if (_currentLevel == 1)
             {
-                bestScore[0] = PlayerPrefs.GetFloat("BestScore1");
+                bestScore[0] = PlayerPrefs.GetFloat("BestScore1", 0f);
             }
             if (_currentLevel == 2)
             {
-                bestScore[1] = PlayerPrefs.GetFloat("BestScore2");
+                bestScore[1] = PlayerPrefs.GetFloat("BestScore2", 0f);
             }
             if (_currentLevel == 3)
             {
-                bestScore[2] = PlayerPrefs.GetFloat("BestScore3");
+                bestScore[2] = PlayerPrefs.GetFloat("BestScore3", 0f);
             }
             if (_currentLevel == 4)
             {
-                bestScore[3] = PlayerPrefs.GetFloat("BestScore4");
+                bestScore[3] = PlayerPrefs.GetFloat("BestScore4", 0f);
             }
             isGetInfo = false;
         }
@@ -142,16 +152,16 @@ public class UiManager2 : MonoBehaviour
 
     private void SetAndSavePoint()
     {
-
+        PlayerPrefs.SetInt("FirstPlay", 0);
         if (timer >= setTime)
         {
             if (_currentLevel == 1)
             {
                 if (bestScore[0] < point)
                 {
-                    Debug.Log("된다4");
+                    Debug.Log("새로운 점수 갱신된다");
                     PlayerPrefs.SetFloat("BestScore1", point);
-                    PlayerPrefs.SetString("BestScore_st1", string.Format("{0}%", Mathf.Ceil(point * 100).ToString()));
+                    PlayerPrefs.SetString("BestScore_st1", processPoint.ToString() + "%");
                     PlayerPrefs.Save();
                 }
             }
@@ -160,7 +170,7 @@ public class UiManager2 : MonoBehaviour
                 if (bestScore[1] < point)
                 {
                     PlayerPrefs.SetFloat("BestScore2", point);
-                    PlayerPrefs.SetString("BestScore_st2", string.Format("{0}%", Mathf.Ceil(point * 100).ToString()));
+                    PlayerPrefs.SetString("BestScore_st2", processPoint.ToString() + "%");
                     PlayerPrefs.Save();
                 }
             }
@@ -169,7 +179,7 @@ public class UiManager2 : MonoBehaviour
                 if (bestScore[2] < point)
                 {
                     PlayerPrefs.SetFloat("BestScore3", point);
-                    PlayerPrefs.SetString("BestScore_st3", string.Format("{0}%", Mathf.Ceil(point * 100).ToString()));
+                    PlayerPrefs.SetString("BestScore_st3", processPoint.ToString() + "%");
                     PlayerPrefs.Save();
                 }
             }
@@ -178,7 +188,7 @@ public class UiManager2 : MonoBehaviour
                 if (bestScore[3] < point)
                 {
                     PlayerPrefs.SetFloat("BestScore4", point);
-                    PlayerPrefs.SetString("BestScore_st4", string.Format("{0}%", Mathf.Ceil(point * 100).ToString()));
+                    PlayerPrefs.SetString("BestScore_st4", processPoint.ToString() + "%");
                     PlayerPrefs.Save();
                 }
             }
@@ -218,7 +228,9 @@ public class UiManager2 : MonoBehaviour
         currentBlock = player.transform.position.z + 1;
         point = currentBlock / allBlock_2;
 
-        float processPoint = Mathf.Ceil(Mathf.Min(point * 100, 100f));
+        Debug.Log("지금 점수는 " + point);
+
+        processPoint = Mathf.Ceil(Mathf.Min(point * 100, 100f));
         realTimeProgress.text = string.Format("{0}%", processPoint.ToString());
     }
 
@@ -277,7 +289,7 @@ public class UiManager2 : MonoBehaviour
         if (checkpointSet)
         {
             Vector3 respawnPosition = lastCheckpointPosition;
-            respawnPosition.y = Mathf.Max(respawnPosition.y + 1f, 0f);
+            respawnPosition.y = Mathf.Max(respawnPosition.y + 0.5f, 0f);
             player.transform.position = respawnPosition;
         }
         else 
@@ -360,7 +372,7 @@ public class UiManager2 : MonoBehaviour
 
     public void ReturnToMainMenu()
     {
-
+        gameUI2[3].SetActive(false);
         Time.timeScale = 1f;
         SceneManager.LoadScene("MainScene");
     }

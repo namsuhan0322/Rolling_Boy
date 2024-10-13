@@ -9,6 +9,7 @@ public class GameManager : MonoBehaviour
     public int currentLevel = 1;
     public float bpm = 120f; // BPM 기본값
     public float beatInterval; //UiManager2로가 가져가기 위해서
+    public bool isCheckPoint = false;
     
     public GameObject player;
 
