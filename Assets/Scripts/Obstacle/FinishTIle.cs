@@ -10,7 +10,8 @@ public class FinishTIle : MonoBehaviour
     {
         if (isFinishTile && other.CompareTag("Player"))
         {
-            //GameManager.instance.OnFinishReached(); // 플레이어가 도착하면 호출
+            SoundManager.instance.StopSound("Game1");
+            Time.timeScale = 0;
         }
     }
 }

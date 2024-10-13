@@ -119,5 +119,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   skyboxMaterials:
-  - {fileID: 2100000, guid: 896fe09c49b73a44ead00a982ee46e6b, type: 2}
-  - {fileID: 2100000, guid: 170f2a047c448444ca1b8e2d20f504f1, type: 2}
+  - {fileID: 2100000, guid: b01d8a5305a527c4daeab5318708e238, type: 2}
+  - {fileID: 2100000, guid: b73dc2c0c9eceae4486bdb5b744fceb9, type: 2}
