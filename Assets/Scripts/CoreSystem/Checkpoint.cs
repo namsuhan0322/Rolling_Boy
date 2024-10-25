@@ -1,7 +1,4 @@
-using System.Runtime.CompilerServices;
-using Unity.PlasticSCM.Editor.WebApi;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Checkpoint : MonoBehaviour
 {
