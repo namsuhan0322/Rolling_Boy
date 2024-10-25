@@ -9,7 +9,6 @@ public class GameManager : MonoBehaviour
     public int currentLevel = 1;
     public float bpm = 120f; // BPM 기본값
     public float beatInterval; //UiManager2로가 가져가기 위해서
-    public bool isCheckPoint = false;
     
     public GameObject player;
 
@@ -18,11 +17,6 @@ public class GameManager : MonoBehaviour
         beatInterval = 60f / bpm; // 1비트당 시간 (초)
         float speed = distancePerBeat / beatInterval; // 이동 속도 계산
         return speed;
-    }
-
-    private void Awake()
-    {
-        //SetResolution();
     }
 
     void Start()
@@ -47,10 +41,5 @@ public class GameManager : MonoBehaviour
                 StartCoroutine(GameStateManager.instance.StartGameWithDelay(1f));
             }
         }
-    }
-
-    private void SetResolution()
-    {
-        //Screen.SetResolution(1080, 1920, FullScreenMode.ExclusiveFullScreen);
     }
 }

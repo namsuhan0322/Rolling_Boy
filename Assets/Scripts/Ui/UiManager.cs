@@ -50,6 +50,7 @@ public class UiManager : MonoBehaviour
     private void Update()
     {
         Intialize();
+        ExitGame();
     }
 
     private void SetPoint()
@@ -88,6 +89,14 @@ public class UiManager : MonoBehaviour
 
             InitializeGame();
             SetPoint();
+        }
+    }
+
+    private void ExitGame()
+    {
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
         }
     }
 
@@ -177,7 +186,6 @@ public class UiManager : MonoBehaviour
             setActive.Add(gameUI[i].activeSelf);
             Debug.Log(setActive[i]);
         }
-        GameManager.instance.isCheckPoint = false;
         LoadingSceneController.LoadScene("GameScene");
     }
 }

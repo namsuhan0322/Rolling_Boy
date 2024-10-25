@@ -73,7 +73,6 @@ public class UiManager2 : MonoBehaviour
 
     private void Start()
     {
-        ResetCheckPoint();
         RespawnPlayer(player);
 
         ClearActive();
@@ -108,21 +107,8 @@ public class UiManager2 : MonoBehaviour
             timer += Time.deltaTime;
             SetAndSavePoint();
         }
-        Debug.Log("1번맵 : " + bestScore[0]);
-        Debug.Log("2번맵 : " + bestScore[1]);
-        Debug.Log("3번맵 : " + bestScore[2]);
-        Debug.Log("4번맵 : " + bestScore[3]);
-        Debug.Log("현재맵은 " + _currentLevel);
     }
 
-    private void ResetCheckPoint()
-    {
-        if (GameManager.instance.isCheckPoint == false)
-        {
-            checkpointSet = GameManager.instance.isCheckPoint;
-            GameManager.instance.isCheckPoint = true;
-        }
-    }
 
     private void GetInfo()
     {
@@ -228,7 +214,7 @@ public class UiManager2 : MonoBehaviour
         currentBlock = player.transform.position.z + 1;
         point = currentBlock / allBlock_2;
 
-        Debug.Log("지금 점수는 " + point);
+        //Debug.Log("지금 점수는 " + point);
 
         processPoint = Mathf.Ceil(Mathf.Min(point * 100, 100f));
         realTimeProgress.text = string.Format("{0}%", processPoint.ToString());
@@ -325,7 +311,7 @@ public class UiManager2 : MonoBehaviour
         }
         else
         {
-            Debug.Log("체크포인트가 할당되지 않았습니다");
+            //Debug.Log("체크포인트가 할당되지 않았습니다");
         }
     }
     public void SetCheckpoint(Vector3 checkpointPosition)
@@ -354,7 +340,7 @@ public class UiManager2 : MonoBehaviour
         else
         {
             currentLevels++;
-            Debug.Log("Proceeding to next stage. Current level: " + currentLevels);
+            //Debug.Log("Proceeding to next stage. Current level: " + currentLevels);
 
             GameManager.instance.currentLevel = currentLevels;
             checkpointSet = false;
@@ -372,6 +358,7 @@ public class UiManager2 : MonoBehaviour
 
     public void ReturnToMainMenu()
     {
+        checkpointSet = false;
         gameUI2[3].SetActive(false);
         Time.timeScale = 1f;
         SceneManager.LoadScene("MainScene");
