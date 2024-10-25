@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571376, b: 0.30692244, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2861,6 +2861,7 @@ MonoBehaviour:
   currentLevel: 1
   bpm: 120
   beatInterval: 0
+  isCheckPoint: 0
   player: {fileID: 1808110610}
 --- !u!4 &723958082
 Transform:
@@ -4873,6 +4874,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1524748921}
   m_CullTransparentMesh: 1
+--- !u!1 &1559963312
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1559963314}
+  - component: {fileID: 1559963313}
+  m_Layer: 0
+  m_Name: ReturnScene
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1559963313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1559963312}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0f3b46e4de2768542958474d6bda2e6e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1559963314
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1559963312}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 960, y: 540, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1560096547
 GameObject:
   m_ObjectHideFlags: 0
@@ -7014,6 +7059,11 @@ PrefabInstance:
       propertyPath: speed
       value: 5
       objectReference: {fileID: 0}
+    - target: {fileID: 7938951044253891356, guid: 4e134d6e1dc80334c9c3b158407ce28d,
+        type: 3}
+      propertyPath: returnScene
+      value: 
+      objectReference: {fileID: 1559963313}
     - target: {fileID: 7953776159609552885, guid: 4e134d6e1dc80334c9c3b158407ce28d,
         type: 3}
       propertyPath: m_LocalScale.x
@@ -7109,3 +7159,4 @@ SceneRoots:
   - {fileID: 1074342589}
   - {fileID: 632475041}
   - {fileID: 2045472803}
+  - {fileID: 1559963314}

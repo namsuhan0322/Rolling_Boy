@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public ReturnScene returnScene;
+
     [Header("Player Movement")]
     public float speed;
     [SerializeField] private bool isSpeed = false;
@@ -128,6 +130,7 @@ public class PlayerController : MonoBehaviour
     
     void Die()
     {
+        StartCoroutine(returnScene.ReturnMainScene());
         gameObject.SetActive(false);
         cameraMove.shake = true;
         SoundManager.instance.StopSound("Game1");
