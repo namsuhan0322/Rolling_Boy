@@ -44,10 +44,7 @@ public class UiManager : MonoBehaviour
     }
     private void Start()
     {
-        InitializeGame();
         SetPoint();
-
-
     }
 
     private void Update()

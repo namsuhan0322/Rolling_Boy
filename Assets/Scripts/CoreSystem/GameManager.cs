@@ -20,6 +20,11 @@ public class GameManager : MonoBehaviour
         return speed;
     }
 
+    private void Awake()
+    {
+        //SetResolution();
+    }
+
     void Start()
     {
         if (instance == null) 
@@ -42,5 +47,10 @@ public class GameManager : MonoBehaviour
                 StartCoroutine(GameStateManager.instance.StartGameWithDelay(1f));
             }
         }
+    }
+
+    private void SetResolution()
+    {
+        //Screen.SetResolution(1080, 1920, FullScreenMode.ExclusiveFullScreen);
     }
 }
